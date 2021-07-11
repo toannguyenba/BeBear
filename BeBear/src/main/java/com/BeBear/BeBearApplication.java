@@ -13,9 +13,9 @@ public class BeBearApplication {
 		SpringApplication.run(BeBearApplication.class, args);
 	}
 	
-	@GetMapping("/")
-	public String index() {
-		return "index";
-	}
+//	@GetMapping("/")
+//	public String index() {
+//		return "index";
+//	}
 
 }
