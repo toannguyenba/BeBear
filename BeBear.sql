@@ -18,14 +18,16 @@
 --
 -- Table structure for table `account`
 --
-
+create database `BeBear`;
+use `BeBear`;
 DROP TABLE IF EXISTS `account`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `account` (
+  `IdAccount` int NOT NULL AUTO_INCREMENT,
   `Email` varchar(20) NOT NULL,
   `Password` varchar(20) NOT NULL,
-  `UserName` varchar(20) NOT NULL, -- Bỏ
+  `UserName` varchar(20), -- Bỏ
   `FirstName` varchar(20) NOT NULL,
   `LastName` varchar(20) NOT NULL,
   `FullName` varchar(40) NOT NULL,
@@ -33,11 +35,11 @@ CREATE TABLE `account` (
   `Birthday` datetime DEFAULT NULL,
   `Address` varchar(45) NOT NULL,
   `PhoneNumber` varchar(15) NOT NULL,
-  `Usercheck` int NOT NULL,   -- Đổi tên thành role
+  `Role` int NOT NULL,   -- Đổi tên thành role
   `Status` int NOT NULL,
   `UpdateDatetime` datetime NOT NULL,
   `Updater` varchar(20) NOT NULL,
-  PRIMARY KEY (`Email`)
+  PRIMARY KEY (`IdAccount`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -187,8 +189,8 @@ CREATE TABLE `productPhoto` (
   `IdProduct` int NOT NULL,
   `IdPhoto` int NOT NULL AUTO_INCREMENT,
   `URL` varchar(255),
-  PRIMARY KEY (`IdProduct`)
-)
+  PRIMARY KEY (`IdPhoto`)
+);
 
 --
 -- Dumping data for table `product`
