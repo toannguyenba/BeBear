@@ -10,30 +10,30 @@ import java.util.Date;
  * 
  */
 @Entity
-@NamedQuery(name="Product.findAll", query="SELECT p FROM Product p")
+//@NamedQuery(name="Product.findAll", query="SELECT p FROM Product p")
+@Table(name = "product")
 public class Product implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name = "IdProduct")
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "idproduct")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idProduct;
-
+	
+	@Column(name = "description")
 	private String description;
-
+	
+	@Column(name = "idcategory")
 	private int idCategory;
 
-	private String image1;
-
-	private String image2;
-
-	private String image3;
-
+	@Column(name = "productname")
 	private String productName;
 
 	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "updatedatetime")
 	private Date updateDatetime;
 
+	@Column(name = "updater")
 	private String updater;
 
 	public Product() {
@@ -61,30 +61,6 @@ public class Product implements Serializable {
 
 	public void setIdCategory(int idCategory) {
 		this.idCategory = idCategory;
-	}
-
-	public String getImage1() {
-		return this.image1;
-	}
-
-	public void setImage1(String image1) {
-		this.image1 = image1;
-	}
-
-	public String getImage2() {
-		return this.image2;
-	}
-
-	public void setImage2(String image2) {
-		this.image2 = image2;
-	}
-
-	public String getImage3() {
-		return this.image3;
-	}
-
-	public void setImage3(String image3) {
-		this.image3 = image3;
 	}
 
 	public String getProductName() {

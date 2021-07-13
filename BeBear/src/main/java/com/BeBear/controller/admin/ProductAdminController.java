@@ -3,11 +3,14 @@
  */
 package com.BeBear.controller.admin;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.BeBear.entities.Product;
 import com.BeBear.repositories.ProductRepository;
 
 /**
@@ -22,7 +25,13 @@ public class ProductAdminController {
 	
 	@GetMapping("/adminProduct")
 	public String listProduct(Model model) {
-		model.addAttribute("listRepository", productRepository.findAll());
+		try {
+			List<Product> products = productRepository.findAll();
+			model.addAttribute("products", products);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		
 		return "admin/products";
 	}
 }

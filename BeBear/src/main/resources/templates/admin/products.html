@@ -74,20 +74,20 @@
                                                     <table class="table table-hover">
                                                         <thead>
                                                             <tr>
-                                                                <th></th>
+                                                                <th>Mã sản phẩm</th>
                                                                 <th>Tên sản phẩm</th>
                                                                 <th>Phân loại</th>
                                                                 <th>Giá bán</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            <tr>
-                                                                <th scope="row">1</th>
-                                                                <td>Mark</td>
-                                                                <td>Otto</td>
-                                                                <td>@mdo</td>
+                                                            <tr th:each ="product : ${products}">
+                                                                <th scope="row" th:utext="${product.idProduct}"></th>
+                                                                <td th:utext="${product.productName}"></td>
+                                                                <td th:utext="${product.updateDatetime}"></td>
+                                                                <td th:utext="${product.description}"></td>
                                                             </tr>
-                                                            <tr>
+                                                            <!-- <tr>
                                                                 <th scope="row">2</th>
                                                                 <td>Jacob</td>
                                                                 <td>Thornton</td>
@@ -98,7 +98,7 @@
                                                                 <td>Larry</td>
                                                                 <td>the Bird</td>
                                                                 <td>@twitter</td>
-                                                            </tr>
+                                                            </tr> -->
                                                         </tbody>
                                                     </table>
                                                 </div>
