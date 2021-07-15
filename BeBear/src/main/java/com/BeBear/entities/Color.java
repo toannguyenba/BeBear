@@ -1,8 +1,18 @@
 package com.BeBear.entities;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.hibernate.annotations.UpdateTimestamp;
 
 
 /**
@@ -15,18 +25,26 @@ public class Color implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@Column(name = "idcolor")
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int idColor;
 
+	@Column(name = "colorname")
 	private String colorName;
 
+	@Column(name = "description")
 	private String description;
 
-	private int status;
+	@Column(name = "status")
+	private int status = 0;
 
+	@Column(name = "updatedatetime")
 	@Temporal(TemporalType.TIMESTAMP)
+	@UpdateTimestamp
 	private Date updateDatetime;
 
-	private String updater;
+	@Column(name = "updater")
+	private String updater = "SystemAdmin";
 
 	public Color() {
 	}

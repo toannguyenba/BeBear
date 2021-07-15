@@ -90,9 +90,9 @@ CREATE TABLE `color` (
   `IdColor` int NOT NULL AUTO_INCREMENT,
   `ColorName` varchar(45) NOT NULL,
   `Description` varchar(45) NOT NULL,
-  `Status` int NOT NULL,
-  `UpdateDatetime` datetime NOT NULL,
-  `Updater` varchar(45) NOT NULL,
+  `Status` int,
+  `UpdateDatetime` datetime,
+  `Updater` varchar(45),
   PRIMARY KEY (`IdColor`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -175,14 +175,11 @@ CREATE TABLE `product` (
   `IdProduct` int NOT NULL AUTO_INCREMENT,
   `ProductName` varchar(45) NOT NULL,
   `IdCategory` int NOT NULL,
-  `Image1` varchar(100) NOT NULL,
-  `Image2` varchar(100) NOT NULL,
-  `Image3` varchar(100) NOT NULL,
-  `Description` varchar(255) NOT NULL,
-  `UpdateDatetime` datetime NOT NULL,
-  `Updater` varchar(45) NOT NULL,
+  `Description` varchar(255),
+  `UpdateDatetime` datetime,
+  `Updater` varchar(45),
   PRIMARY KEY (`IdProduct`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 CREATE TABLE `productPhoto` (
