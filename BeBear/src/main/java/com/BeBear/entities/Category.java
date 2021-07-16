@@ -3,6 +3,7 @@ package com.BeBear.entities;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 
 /**
@@ -22,6 +23,9 @@ public class Category implements Serializable {
 	private String description;
 
 	private int status;
+	
+	@OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
+	private List<Product> products;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date updateDatetime;
@@ -77,6 +81,14 @@ public class Category implements Serializable {
 
 	public void setUpdater(String updater) {
 		this.updater = updater;
+	}
+
+	public List<Product> getProducts() {
+		return products;
+	}
+
+	public void setProducts(List<Product> products) {
+		this.products = products;
 	}
 
 }

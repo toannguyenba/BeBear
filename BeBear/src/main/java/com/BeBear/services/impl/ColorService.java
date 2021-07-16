@@ -1,6 +1,7 @@
 package com.BeBear.services.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,5 +20,17 @@ public class ColorService implements IColorService {
 	public int saveAllColor(List<Color> colors) {
 		int result = colorRepo.saveAll(colors).size();
 		return result;
+	}
+
+	@Override
+	public List<Color> findAllColor() {
+		List<Color> colors = colorRepo.findAll();
+		return colors;
+	}
+
+	@Override
+	public Optional<Color> findColorById(int id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

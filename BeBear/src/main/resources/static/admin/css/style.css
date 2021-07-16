@@ -16458,3 +16458,7 @@ body.dark {
   bottom: 50px;
   opacity: 1;
 }
+.icon-tool {
+	margin: 0 10px 0 0;
+	cursor: pointer;
+}

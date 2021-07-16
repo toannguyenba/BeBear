@@ -17,7 +17,10 @@ import com.BeBear.entities.Product;
  */
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Integer> {
-    @Query(value="select p.idproduct, p.productname, p.description, c.CategoryName from product p\r\n" + 
-    		"left join category c on p.idcategory = c.idcategory;", nativeQuery = true)
-    public List<Product> findAllProductInfo();
+//    @Query(value="select p.idproduct, p.productname, c.CategoryName, p.description, p.updatedatetime, p.updater from product p" + 
+//    		"left join category c on p.idcategory = c.idcategory;", nativeQuery = true)
+//    public List<ProductInfo> findAllProductInfo();
+    
+//	@Query(value = "select p.idproduct, p.productname, c.CategoryName, p.description, p.updatedatetime, p.updater from product p left join category c on p.idcategory = c.idcategory")
+//    public List<Product> findAllProduct();
 }

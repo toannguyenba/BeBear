@@ -22,9 +22,6 @@ public class Product implements Serializable {
 	
 	@Column(name = "description")
 	private String description;
-	
-	@Column(name = "idcategory")
-	private int idCategory;
 
 	@Column(name = "productname")
 	private String productName;
@@ -35,6 +32,18 @@ public class Product implements Serializable {
 
 	@Column(name = "updater")
 	private String updater;
+	
+	@ManyToOne
+	@JoinColumn(name = "idcategory")
+	private Category category;
+
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
 
 	public Product() {
 	}
@@ -53,14 +62,6 @@ public class Product implements Serializable {
 
 	public void setDescription(String description) {
 		this.description = description;
-	}
-
-	public int getIdCategory() {
-		return this.idCategory;
-	}
-
-	public void setIdCategory(int idCategory) {
-		this.idCategory = idCategory;
 	}
 
 	public String getProductName() {
