@@ -15,25 +15,38 @@ public class Productdetail implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@Column(name = "idproductdetail")
 	private int idProductDetail;
 
-	private int idColor;
+    @ManyToOne
+    @JoinColumn(name = "idcolor",insertable=false, updatable=false)
+	private Color idColor;
 
-	private int idProduct;
+    @ManyToOne
+    @JoinColumn(name = "idproduct",insertable=false, updatable=false)
+	private Product idProduct;
 
-	private int idSize;
+    @ManyToOne
+    @JoinColumn(name = "idsize",insertable=false, updatable=false)
+	private Size idSize;
 
+    @Column(name = "price")
 	private float price;
 
+    @Column(name = "quantity")
 	private int quantity;
 
+    @Column(name = "salePrice")
 	private float salePrice;
 
+    @Column(name = "status")
 	private int status;
 
+    @Column(name = "updateDatetime")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date updateDatetime;
 
+    @Column(name = "updater")
 	private String updater;
 
 	public Productdetail() {
@@ -47,32 +60,32 @@ public class Productdetail implements Serializable {
 		this.idProductDetail = idProductDetail;
 	}
 
-	public int getIdColor() {
-		return this.idColor;
+	public Color getIdColor() {
+		return idColor;
 	}
 
-	public void setIdColor(int idColor) {
+	public void setIdColor(Color idColor) {
 		this.idColor = idColor;
 	}
 
-	public int getIdProduct() {
-		return this.idProduct;
+	public Product getIdProduct() {
+		return idProduct;
 	}
 
-	public void setIdProduct(int idProduct) {
+	public void setIdProduct(Product idProduct) {
 		this.idProduct = idProduct;
 	}
 
-	public int getIdSize() {
-		return this.idSize;
+	public Size getIdSize() {
+		return idSize;
 	}
 
-	public void setIdSize(int idSize) {
+	public void setIdSize(Size idSize) {
 		this.idSize = idSize;
 	}
 
 	public float getPrice() {
-		return this.price;
+		return price;
 	}
 
 	public void setPrice(float price) {
@@ -80,7 +93,7 @@ public class Productdetail implements Serializable {
 	}
 
 	public int getQuantity() {
-		return this.quantity;
+		return quantity;
 	}
 
 	public void setQuantity(int quantity) {
@@ -88,7 +101,7 @@ public class Productdetail implements Serializable {
 	}
 
 	public float getSalePrice() {
-		return this.salePrice;
+		return salePrice;
 	}
 
 	public void setSalePrice(float salePrice) {
@@ -96,7 +109,7 @@ public class Productdetail implements Serializable {
 	}
 
 	public int getStatus() {
-		return this.status;
+		return status;
 	}
 
 	public void setStatus(int status) {
@@ -104,7 +117,7 @@ public class Productdetail implements Serializable {
 	}
 
 	public Date getUpdateDatetime() {
-		return this.updateDatetime;
+		return updateDatetime;
 	}
 
 	public void setUpdateDatetime(Date updateDatetime) {
@@ -112,7 +125,7 @@ public class Productdetail implements Serializable {
 	}
 
 	public String getUpdater() {
-		return this.updater;
+		return updater;
 	}
 
 	public void setUpdater(String updater) {

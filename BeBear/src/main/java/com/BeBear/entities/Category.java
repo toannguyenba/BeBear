@@ -16,20 +16,26 @@ public class Category implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@Column(name="idcategory")
 	private int idCategory;
 
+	@Column(name="categoryname")
 	private String categoryName;
 
+	@Column(name="description")
 	private String description;
 
+	@Column(name="status")
 	private int status;
 	
 	@OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
 	private List<Product> products;
 
+	@Column(name="updatedatetime")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date updateDatetime;
 
+	@Column(name="updater")
 	private String updater;
 
 	public Category() {

@@ -16,7 +16,9 @@ public class Productphoto implements Serializable {
 	@Id
 	private int idPhoto;
 
-	private int idProduct;
+    @ManyToOne
+    @JoinColumn(name = "idProduct",insertable=false, updatable=false)
+	private Product idProduct;
 
 	private String url;
 
@@ -31,11 +33,11 @@ public class Productphoto implements Serializable {
 		this.idPhoto = idPhoto;
 	}
 
-	public int getIdProduct() {
-		return this.idProduct;
+	public Product getIdProduct() {
+		return idProduct;
 	}
 
-	public void setIdProduct(int idProduct) {
+	public void setIdProduct(Product idProduct) {
 		this.idProduct = idProduct;
 	}
 

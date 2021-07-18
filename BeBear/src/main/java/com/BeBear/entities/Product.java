@@ -1,8 +1,20 @@
 package com.BeBear.entities;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 
 /**
@@ -36,6 +48,20 @@ public class Product implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "idcategory")
 	private Category category;
+	
+	@OneToMany(mappedBy = "idProduct")
+	private List<Productphoto> idPhoto;
+	
+	@OneToMany(mappedBy = "idProduct")
+	private List<Productdetail> productdetail;
+
+	public List<Productdetail> getProductdetail() {
+		return productdetail;
+	}
+
+	public void setProductdetail(List<Productdetail> productdetail) {
+		this.productdetail = productdetail;
+	}
 
 	public Category getCategory() {
 		return category;
@@ -86,6 +112,14 @@ public class Product implements Serializable {
 
 	public void setUpdater(String updater) {
 		this.updater = updater;
+	}
+
+	public List<Productphoto> getIdPhoto() {
+		return idPhoto;
+	}
+
+	public void setIdPhoto(List<Productphoto> idPhoto) {
+		this.idPhoto = idPhoto;
 	}
 
 }
