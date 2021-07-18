@@ -5,12 +5,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.BeBear.entities.Color;
-import com.BeBear.model.ColorInput;
 import com.BeBear.services.impl.ColorService;
 
 @Controller
@@ -50,7 +48,7 @@ public class ColorAdminController {
 	}
 	
 	@PostMapping("/admin/deleteColor")
-	public String addColor(@ModelAttribute("id") int id, RedirectAttributes redirectAtt) {
+	public String deleteColor(@ModelAttribute("id") int id, RedirectAttributes redirectAtt) {
 		boolean result = colorService.deleteColorById(id);
 		if (result) {
 			redirectAtt.addFlashAttribute("message", "Xóa thành công");			
