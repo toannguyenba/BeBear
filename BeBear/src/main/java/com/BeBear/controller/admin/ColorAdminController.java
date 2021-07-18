@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.BeBear.entities.Color;
 import com.BeBear.model.ColorInput;
@@ -25,23 +26,37 @@ public class ColorAdminController {
 		return "admin/color";
 	}
 	
-	@GetMapping("/addColor/{id}")
-	public String editColor(@PathVariable(name = "id") int id, Model model) {
-		model.addAttribute("color", colorService.findColorById(id));
-		return "admin/color-input";
-	}
-
-	@GetMapping("admin/addColor")
-	public String inputColor(Model model) {
-		model.addAttribute("colors", new ColorInput());
-		return "admin/color-input";
+	@PostMapping("/admin/editColor")
+	public String editColor(@ModelAttribute("color") Color color, RedirectAttributes redirectAtt) {
+		boolean result = colorService.saveColor(color);
+		if (result) {
+			redirectAtt.addAttribute("message", "Cập nhật thành công");			
+		} else {
+			redirectAtt.addAttribute("message", "Cập nhật thất bại");	
+		}
+		return "redirect:/admin/color";
 	}
 
 	@PostMapping("/admin/addColor")
-	public String addColor(@ModelAttribute("color") Color color) {
-		System.out.println(color.toString());
+	public String addColor(@ModelAttribute("color") Color color, RedirectAttributes redirectAtt) {
 		boolean result = colorService.saveColor(color);
+		if (result) {
+			redirectAtt.addAttribute("message", "Thêm mới thành công");			
+		} else {
+			redirectAtt.addAttribute("message", "Thêm mới thất bại");	
+		}
 		return "redirect:/admin/color";
 
+	}
+	
+	@PostMapping("/admin/deleteColor")
+	public String addColor(@ModelAttribute("id") int id, RedirectAttributes redirectAtt) {
+		boolean result = colorService.deleteColorById(id);
+		if (result) {
+			redirectAtt.addFlashAttribute("message", "Xóa thành công");			
+		} else {
+			redirectAtt.addFlashAttribute("message", "Xóa thất bại");	
+		}
+		return "redirect:/admin/color";
 	}
 }

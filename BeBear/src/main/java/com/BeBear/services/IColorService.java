@@ -13,5 +13,5 @@ public interface IColorService {
 	
 	public List<Color> findAllColor();
 	
-	public Optional<Color> findColorById(int id);
+	public boolean deleteColorById(int id);
 }

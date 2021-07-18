@@ -72,7 +72,7 @@
 											<div class="card-header">
 												<h3>Danh sách màu</h3>
 												<div class="card-header-right">
-													<button @click="add('Thêm màu sắc')" data-toggle="modal" data-target=".bd-example-modal-lg">Thêm màu sắc</button>
+													<button class="btn btn-primary btn-round waves-effect waves-light" @click="add('Thêm màu sắc')" data-toggle="modal" data-target=".bd-example-modal-lg">Thêm màu sắc</button>
 													<ul class="list-unstyled card-option">
 														<li><i class="fa fa fa-wrench open-card-option"></i></li>
 														<li><i class="fa fa-window-maximize full-card"></i></li>
@@ -84,26 +84,6 @@
 											</div>
 											<div class="card-block table-border-style">
 												<div class="table-responsive">
-													<!-- <table class="table table-hover">
-														<thead>
-															<tr>
-																<th>ID</th>
-																<th>Tên màu</th>
-																<th>Mô tả</th>
-																<th>Công cụ</th>
-															</tr>
-														</thead>
-														<tbody>
-															<tr th:each="color : ${colors}">
-																<th scope="row" th:utext="${color.idColor}"></th>
-																<td th:utext="${color.colorName}"></td>
-																<td th:utext="${color.description}"></td>
-																<td>
-																	<a data-toggle="modal" data-target=".bd-example-modal-lg" class="icon-tool"><i class="ti-pencil"></i></a> 
-																	<a class="icon-tool"><i class="ti-trash"></i></a></td>
-															</tr>
-														</tbody>
-													</table> -->
 													<table class="table table-hover">
 														<thead>
 															<tr>
@@ -120,7 +100,7 @@
 																<td> {{ color.description }} </td>
 																<td>
 																	<a data-toggle="modal" data-target=".bd-example-modal-lg" class="icon-tool" @click="edit(index, 'Chỉnh sửa màu sắc')"><i class="ti-pencil"></i></a> 
-																	<a class="icon-tool"><i class="ti-trash"></i></a></td>
+																	<a data-toggle="modal" data-target=".bd-example-modal-md" class="icon-tool" @click="remove(color.idColor)"><i class="ti-trash"></i></a></td>
 															</tr>
 														</tbody>
 													</table>
@@ -129,7 +109,7 @@
 														aria-hidden="true">
 														<div class="modal-dialog modal-lg">
 															<div class="modal-content">
-																<form action="addColor" th:object="${color}" method="post">
+																<form :action="link" th:object="${color}" method="post">
 																	<div class="modal-header">
 																		<h5 class="modal-title" id="exampleModalLongTitle">
 																			{{ title }}</h5>
@@ -144,6 +124,7 @@
 																				<h4>Tên màu</h4>
 																				<input type="text" class="form-control" th:field="*{colorName}"
 																					v-model="c.colorName">
+																				<input type="hidden" v-if="link == 'editColor'" th:field="*{idColor}" v-model="c.idColor">
 																			</div>
 																			<div class="col-sm-6">
 																				<h4>Mô tả</h4>
@@ -157,6 +138,30 @@
 																			data-dismiss="modal">Close</button>
 																		<button type="submit" class="btn btn-primary">Save
 																			changes</button>
+																	</div>
+																</form>
+															</div>
+														</div>
+													</div>
+													<div class="modal fade bd-example-modal-md" tabindex="-1"
+														role="dialog" aria-labelledby="myLargeModalLabel"
+														aria-hidden="true">
+														<div class="modal-dialog modal-lg">
+															<div class="modal-content">
+																<form action="deleteColor" method="post">
+																	<div class="modal-header">
+																		<h5 class="modal-title" id="exampleModalLongTitle">
+																			Xác nhận xóa màu?</h5>
+																		<button type="button" class="close"
+																			data-dismiss="modal" aria-label="Close">
+																			<span aria-hidden="true">&times;</span>
+																		</button>
+																	</div>
+																	<input type="hidden" name="id" v-model="id">	
+																	<div class="modal-footer">
+																		<button type="button" class="btn btn-secondary"
+																			data-dismiss="modal">Đóng</button>
+																		<button type="submit" class="btn btn-primary">Xóa</button>
 																	</div>
 																</form>
 															</div>
@@ -189,15 +194,22 @@
       				colorName: '',
       				description: ''      				
       			},
-      			title: ''
+      			title: '',
+      			link: '',
+      			id: 0
   			  },
         methods: {
             edit(index, title) {
-                this.c = this.colors[index];
+                this.c = JSON.parse(JSON.stringify(this.colors[index]));
                 this.title = title;
+                this.link = 'editColor';
             },
             add(title) {
             	this.title = title;
+            	this.link = 'addColor';
+            },
+            remove(id) {
+            	this.id = id;
             }
         },
         mounted() {

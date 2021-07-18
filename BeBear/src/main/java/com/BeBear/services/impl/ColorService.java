@@ -29,9 +29,9 @@ public class ColorService implements IColorService {
 	}
 
 	@Override
-	public Optional<Color> findColorById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+	public boolean deleteColorById(int id) {
+		colorRepo.deleteById(id);
+		return true;
 	}
 
 	@Override
