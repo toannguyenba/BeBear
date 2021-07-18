@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.BeBear.entities.Color;
 import com.BeBear.model.ColorInput;
 import com.BeBear.services.impl.ColorService;
 
@@ -17,9 +18,10 @@ public class ColorAdminController {
 	@Autowired
 	ColorService colorService;
 	
-	@GetMapping("/adminColor")
+	@GetMapping("/admin/color")
 	public String listColor(Model model) {
 		model.addAttribute("colors", colorService.findAllColor());
+		model.addAttribute("color", new Color());
 		return "admin/color";
 	}
 	
@@ -29,17 +31,17 @@ public class ColorAdminController {
 		return "admin/color-input";
 	}
 
-	@GetMapping("/addColor")
+	@GetMapping("admin/addColor")
 	public String inputColor(Model model) {
 		model.addAttribute("colors", new ColorInput());
 		return "admin/color-input";
 	}
 
-	@PostMapping("/addColor")
-	public String addColor(@ModelAttribute("color") ColorInput colors) {
-		System.out.println(colors.toString());
-		int result = colorService.saveAllColor(colors.getColors());
-		return "redirect:addColor";
+	@PostMapping("/admin/addColor")
+	public String addColor(@ModelAttribute("color") Color color) {
+		System.out.println(color.toString());
+		boolean result = colorService.saveColor(color);
+		return "redirect:/admin/color";
 
 	}
 }

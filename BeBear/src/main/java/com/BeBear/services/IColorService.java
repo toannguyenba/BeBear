@@ -9,6 +9,8 @@ public interface IColorService {
 
 	public int saveAllColor(List<Color> colors);
 	
+	public boolean saveColor(Color color);
+	
 	public List<Color> findAllColor();
 	
 	public Optional<Color> findColorById(int id);

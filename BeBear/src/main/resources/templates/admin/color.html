@@ -19,46 +19,46 @@
 	content="bootstrap, bootstrap admin template, admin theme, admin dashboard, dashboard template, admin template, responsive" />
 <meta name="author" content="codedthemes" />
 <!-- Favicon icon -->
-<link rel="icon" href="admin/images/favicon.ico" type="image/x-icon">
+<link rel="icon" href="/admin/images/favicon.ico" type="image/x-icon">
 <!-- Google font-->
 <link href="https://fonts.googleapis.com/css?family=Roboto:400,500"
 	rel="stylesheet">
 <!-- waves.css -->
-<link rel="stylesheet" href="admin/pages/waves/css/waves.min.css"
+<link rel="stylesheet" href="/admin/pages/waves/css/waves.min.css"
 	type="text/css" media="all">
 <!-- Required Fremwork -->
 <link rel="stylesheet" type="text/css"
-	href="admin/css/bootstrap/css/bootstrap.min.css">
+	href="/admin/css/bootstrap/css/bootstrap.min.css">
 <!-- waves.css -->
-<link rel="stylesheet" href="admin/pages/waves/css/waves.min.css"
+<link rel="stylesheet" href="/admin/pages/waves/css/waves.min.css"
 	type="text/css" media="all">
 <!-- themify icon -->
 <link rel="stylesheet" type="text/css"
-	href="admin/icon/themify-icons/themify-icons.css">
+	href="/admin/icon/themify-icons/themify-icons.css">
 <!-- Font Awesome -->
 <link rel="stylesheet" type="text/css"
-	href="admin/icon/font-awesome/css/font-awesome.min.css">
+	href="/admin/icon/font-awesome/css/font-awesome.min.css">
 <!-- scrollbar.css -->
 <link rel="stylesheet" type="text/css"
-	href="admin/css/jquery.mCustomScrollbar.css">
+	href="/admin/css/jquery.mCustomScrollbar.css">
 <!-- am chart export.css -->
 <link rel="stylesheet"
 	href="https://www.amcharts.com/lib/3/plugins/export/export.css"
 	type="text/css" media="all" />
 <!-- Style.css -->
-<link rel="stylesheet" type="text/css" href="admin/css/style.css">
+<link rel="stylesheet" type="text/css" href="/admin/css/style.css">
 </head>
 <body>
 	<div id="pcoded" class="pcoded">
 		<div class="pcoded-overlay-box"></div>
 		<div class="pcoded-container navbar-wrapper">
 			<!-- Menu Top start -->
-			<div th:insert="admin/menu-top.html"></div>
+			<div th:insert="/admin/menu-top.html"></div>
 			<!-- Menu Top end -->
 			<div class="pcoded-main-container">
 				<div class="pcoded-wrapper">
 					<!-- Menu Right start -->
-					<div th:insert="admin/menu-right.html"></div>
+					<div th:insert="/admin/menu-right.html"></div>
 					<!-- Menu Right end -->
 					<div class="pcoded-content">
 						<div class="pcoded-inner-content">
@@ -142,12 +142,12 @@
 																		<div class="form-group row">
 																			<div class="col-sm-6">
 																				<h4>Tên màu</h4>
-																				<input type="text" class="form-control" name="color[0].colorName"
+																				<input type="text" class="form-control" th:field="*{colorName}"
 																					v-model="c.colorName">
 																			</div>
 																			<div class="col-sm-6">
 																				<h4>Mô tả</h4>
-																				<input type="text" class="form-control" name="colors[0].description"
+																				<input type="text" class="form-control" th:field="*{description}"
 																					v-model="c.description">
 																			</div>
 																		</div>
@@ -205,39 +205,39 @@
         }
   })  
 </script>
-	<script type="text/javascript" src="admin/js/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="/admin/js/jquery/jquery.min.js"></script>
 	<script type="text/javascript"
-		src="admin/js/jquery-ui/jquery-ui.min.js "></script>
-	<script type="text/javascript" src="admin/js/popper.js/popper.min.js"></script>
+		src="/admin/js/jquery-ui/jquery-ui.min.js "></script>
+	<script type="text/javascript" src="/admin/js/popper.js/popper.min.js"></script>
 	<script type="text/javascript"
-		src="admin/js/bootstrap/js/bootstrap.min.js "></script>
-	<script type="text/javascript" src="admin/pages/widget/excanvas.js "></script>
+		src="/admin/js/bootstrap/js/bootstrap.min.js "></script>
+	<script type="text/javascript" src="/admin/pages/widget/excanvas.js "></script>
 	<!-- waves js -->
-	<script src="admin/pages/waves/js/waves.min.js"></script>
+	<script src="/admin/pages/waves/js/waves.min.js"></script>
 	<!-- jquery slimscroll js -->
 	<script type="text/javascript"
-		src="admin/js/jquery-slimscroll/jquery.slimscroll.js "></script>
+		src="/admin/js/jquery-slimscroll/jquery.slimscroll.js "></script>
 	<!-- modernizr js -->
-	<script type="text/javascript" src="admin/js/modernizr/modernizr.js "></script>
+	<script type="text/javascript" src="/admin/js/modernizr/modernizr.js "></script>
 	<!-- slimscroll js -->
-	<script type="text/javascript" src="admin/js/SmoothScroll.js"></script>
-	<script src="admin/js/jquery.mCustomScrollbar.concat.min.js "></script>
+	<script type="text/javascript" src="/admin/js/SmoothScroll.js"></script>
+	<script src="/admin/js/jquery.mCustomScrollbar.concat.min.js "></script>
 	<!-- Chart js -->
-	<script type="text/javascript" src="admin/js/chart.js/Chart.js"></script>
+	<script type="text/javascript" src="/admin/js/chart.js/Chart.js"></script>
 	<!-- amchart js -->
 	<script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
-	<script src="admin/pages/widget/amchart/gauge.js"></script>
-	<script src="admin/pages/widget/amchart/serial.js"></script>
-	<script src="admin/pages/widget/amchart/light.js"></script>
-	<script src="admin/pages/widget/amchart/pie.min.js"></script>
+	<script src="/admin/pages/widget/amchart/gauge.js"></script>
+	<script src="/admin/pages/widget/amchart/serial.js"></script>
+	<script src="/admin/pages/widget/amchart/light.js"></script>
+	<script src="/admin/pages/widget/amchart/pie.min.js"></script>
 	<script
 		src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
 	<!-- menu js -->
-	<script src="admin/js/pcoded.min.js"></script>
-	<script src="admin/js/vertical-layout.min.js "></script>
+	<script src="/admin/js/pcoded.min.js"></script>
+	<script src="/admin/js/vertical-layout.min.js "></script>
 	<!-- custom js -->
 	<script type="text/javascript"
-		src="admin/pages/dashboard/custom-dashboard.js"></script>
-	<script type="text/javascript" src="admin/js/script.js "></script>
+		src="/admin/pages/dashboard/custom-dashboard.js"></script>
+	<script type="text/javascript" src="/admin/js/script.js "></script>
 </body>
 </html>

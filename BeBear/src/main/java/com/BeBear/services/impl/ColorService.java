@@ -33,4 +33,10 @@ public class ColorService implements IColorService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public boolean saveColor(Color color) {
+		Color result = colorRepo.save(color);
+		return result != null ? true : false;
+	}
 }
