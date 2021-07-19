@@ -28,6 +28,7 @@ public class ProductAdminController {
 		try {
 			List<Product> products = productRepository.findAll();
 			model.addAttribute("products", products);
+			model.addAttribute("product", new Product());
 		} catch (Exception e) {
 			System.out.println(e);
 		}
