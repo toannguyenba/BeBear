@@ -27,6 +27,11 @@ public class ProductAdminController {
 	public String listProduct(Model model) {
 		try {
 			List<Product> products = productRepository.findAll();
+//			System.out.println(products.get(0).getIdPhoto());
+			for(Product temp: products ) {
+				temp.setIdPhoto(null);
+				temp.setProductdetail(null);
+			}
 			model.addAttribute("products", products);
 			model.addAttribute("product", new Product());
 		} catch (Exception e) {

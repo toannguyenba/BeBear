@@ -96,10 +96,10 @@
 														</thead>
 														<tbody>
 															<tr v-for="(product,index) in products">
-																<th scope="row"> {{ index }} </th>
-																<td> {{ product.productName }} </td>
-																<td> {{ product.category.categoryName }} </td>
-																<td> {{ product.description }} </td>
+																<th scope="row" > {{ index }} </th>
+																<td >{{ product.productName }}</td>
+																<td >{{ product.category.categoryName }}</td>
+																<td >{{ product.description }}</td>
 																<td>
 																	<a data-toggle="modal" data-target=".bd-example-modal-lg" class="icon-tool" @click="edit(index, 'Chỉnh sửa sản phẩm')"><i class="ti-pencil"></i></a> 
 																	<a data-toggle="modal" data-target=".bd-example-modal-md" class="icon-tool" @click="remove(color.idProduct)"><i class="ti-trash"></i></a>
@@ -112,7 +112,7 @@
 														aria-hidden="true">
 														<div class="modal-dialog modal-lg">
 															<div class="modal-content">
-																<form :action="link" th:object="${product}" method="post">
+																<form th:action="link" th:object="${product}" method="post">
 																	<div class="modal-header">
 																		<h5 class="modal-title" id="exampleModalLongTitle">
 																			{{ title }}</h5>
@@ -126,7 +126,7 @@
 																			<div class="col-sm-6">
 																				<h4>Tên sản phẩm</h4>
 																				<input type="text" class="form-control" th:field="*{productName}"
-																					v-model="c.productName">
+																					v-model="p.productName">
 																				<input type="hidden" v-if="link == 'editProduct'" th:field="*{idProduct}" v-model="p.idProduct">
 																			</div>
 																			<div class="col-sm-6">
@@ -205,7 +205,8 @@
         methods: {
             edit(index, title) {
                 this.p = JSON.parse(JSON.stringify(this.products[index]));
-                this.title = title;
+                console.log(this.p.category.categoryName);
+                this.title = "Update";
                 this.link = 'editProduct';
             },
             add(title) {
@@ -218,7 +219,7 @@
         },
         mounted() {
             this.products = [[${products}]];
-        	console.log(this.products);
+            console.log(this.products);
         }
   })  
 </script>

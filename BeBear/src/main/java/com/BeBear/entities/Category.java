@@ -28,8 +28,8 @@ public class Category implements Serializable {
 	@Column(name="status")
 	private int status;
 	
-	@OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
-	private List<Product> products;
+//	@OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
+//	private List<Product> products;
 
 	@Column(name="updatedatetime")
 	@Temporal(TemporalType.TIMESTAMP)
@@ -89,12 +89,12 @@ public class Category implements Serializable {
 		this.updater = updater;
 	}
 
-	public List<Product> getProducts() {
-		return products;
-	}
-
-	public void setProducts(List<Product> products) {
-		this.products = products;
-	}
+//	public List<Product> getProducts() {
+//		return products;
+//	}
+//
+//	public void setProducts(List<Product> products) {
+//		this.products = products;
+//	}
 
 }

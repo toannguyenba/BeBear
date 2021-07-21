@@ -14,14 +14,16 @@ public class Productphoto implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@Column(name = "idphoto")
 	private int idPhoto;
 
     @ManyToOne
-    @JoinColumn(name = "idProduct",insertable=false, updatable=false)
+    @JoinColumn(name = "idproduct",insertable=false, updatable=false)
 	private Product idProduct;
 
+    @Column(name = "url")
 	private String url;
-
+    
 	public Productphoto() {
 	}
 
