@@ -70,7 +70,7 @@
 										<!-- Hover table card start -->
 										<div class="card">
 											<div class="card-header">
-												<h4>Danh sách sản phẩm</h4>
+												<h3>Danh sách sản phẩm</h3>
 												<div class="card-header-right">
 												<button class="btn btn-primary btn-round waves-effect waves-light" @click="add('Thêm sản phẩm')" data-toggle="modal" data-target=".bd-example-modal-lg">Thêm sản phẩm</button>
 													<ul class="list-unstyled card-option">
@@ -96,7 +96,7 @@
 														</thead>
 														<tbody>
 															<tr v-for="(product,index) in products">
-																<th scope="row" > {{ index }} </th>
+																<th scope="row" > {{ index + 1 }} </th>
 																<td >{{ product.productName }}</td>
 																<td >{{ product.category.categoryName }}</td>
 																<td >{{ product.description }}</td>
@@ -127,12 +127,13 @@
 																				<h4>Tên sản phẩm</h4>
 																				<input type="text" class="form-control" th:field="*{productName}"
 																					v-model="p.productName">
-																				<input type="hidden" v-if="link == 'editProduct'" th:field="*{idProduct}" v-model="p.idProduct">
+																				<input type="hidden" v-if="link == 'editProduct'"  v-model="p.idProduct" th:field="*{idProduct}">
 																			</div>
 																			<div class="col-sm-6">
 																				<h4>Phân loại</h4>
-																				<input type="text" class="form-control" th:field="*{category.categoryName}"
-																					v-bind:value="p.category">
+																					<select class="form-control select" th:field="*{category}" v-model="p.category.idCategory">
+																						<option th:each="category : ${categorys}" th:value="${category.idCategory}" th:text="${category.categoryName}"></option>
+																					</select>
 																			</div>
 																			<div class="col-sm-6">
 																				<h4>Mô tả</h4>
@@ -197,7 +198,11 @@
   		el: '#app',
         data: {
       			products: [],
-      			p: {},
+      			p: {
+      				category: {
+      					categoryName: ''
+      				}
+      			},
       			title: '',
       			link: '',
       			id: 0
@@ -205,8 +210,8 @@
         methods: {
             edit(index, title) {
                 this.p = JSON.parse(JSON.stringify(this.products[index]));
-                console.log(this.p.category.categoryName);
-                this.title = "Update";
+                console.log(this.p);
+                this.title = title;
                 this.link = 'editProduct';
             },
             add(title) {
@@ -219,7 +224,6 @@
         },
         mounted() {
             this.products = [[${products}]];
-            console.log(this.products);
         }
   })  
 </script>

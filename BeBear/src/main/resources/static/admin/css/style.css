@@ -4450,7 +4450,7 @@ a[data-toggle="lightbox"] .img-fluid {
   to {
     opacity: 0; } }
 select.form-control:not([size]):not([multiple]) {
-  height: 43px; }
+  height: 35px; }
 
 .jFiler.jFiler-theme-default .jFiler-input {
   border: none;
