@@ -102,7 +102,7 @@
 																<td >{{ product.description }}</td>
 																<td>
 																	<a data-toggle="modal" data-target=".bd-example-modal-lg" class="icon-tool" @click="edit(index, 'Chỉnh sửa sản phẩm')"><i class="ti-pencil"></i></a> 
-																	<a data-toggle="modal" data-target=".bd-example-modal-md" class="icon-tool" @click="remove(color.idProduct)"><i class="ti-trash"></i></a>
+																	<a data-toggle="modal" data-target=".bd-example-modal-md" class="icon-tool" @click="remove(product.idProduct)"><i class="ti-trash"></i></a>
 																</td>
 															</tr>
 														</tbody>
@@ -112,7 +112,7 @@
 														aria-hidden="true">
 														<div class="modal-dialog modal-lg">
 															<div class="modal-content">
-																<form th:action="link" th:object="${product}" method="post">
+																<form :action="link" th:object="${product}" method="post">
 																	<div class="modal-header">
 																		<h5 class="modal-title" id="exampleModalLongTitle">
 																			{{ title }}</h5>
@@ -125,8 +125,7 @@
 																		<div class="form-group row">
 																			<div class="col-sm-6">
 																				<h4>Tên sản phẩm</h4>
-																				<input type="text" class="form-control" th:field="*{productName}"
-																					v-model="p.productName">
+																				<input type="text" class="form-control" th:field="*{productName}" v-model="p.productName">
 																				<input type="hidden" v-if="link == 'editProduct'"  v-model="p.idProduct" th:field="*{idProduct}">
 																			</div>
 																			<div class="col-sm-6">
