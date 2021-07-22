@@ -28,16 +28,19 @@ public class ProductAdminController {
 	@Autowired
 	private CategoryRepository categoryRepository;
 	
-	@GetMapping("/adminProduct")
+	@GetMapping("/admin/product")
 	public String listProduct(Model model) {
 		try {
 			List<Product> products = productRepository.findAll();
 			List<Category> categorys = categoryRepository.findAll();
 //			System.out.println(products.get(0).getIdPhoto());
+			
+			// Xử lý tạm thời
 			for(Product temp: products ) {
 				temp.setIdPhoto(null);
 				temp.setProductdetail(null);
 			}
+			// end
 			model.addAttribute("products", products);
 			model.addAttribute("categorys", categorys);
 			model.addAttribute("product", new Product());
