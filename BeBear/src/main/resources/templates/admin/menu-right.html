@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-	<nav class="pcoded-navbar">
+	<nav class="pcoded-navbar" id="app">
         <div class="sidebar_toggle"><a href="#"><i class="icon-close icons"></i></a></div>
         <div class="pcoded-inner-navbar main-menu">
             <div class="">
@@ -37,17 +37,24 @@
             </div>
             <div class="pcoded-navigation-label" data-i18n="nav.category.navigation">Layout</div>
             <ul class="pcoded-item pcoded-left-item">
-                <li class="active">
+                <li th:class="${page} == 'category' ? 'active' : ''">
                     <a href="adminHome" class="waves-effect waves-dark">
                         <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
                         <span class="pcoded-mtext" data-i18n="nav.dash.main">Dashboard</span>
                         <span class="pcoded-mcaret"></span>
                     </a>
                 </li>
+                <li th:class="${page} == 'category' ? 'active' : ''">
+                    <a href="/admin/category" class="waves-effect waves-dark">
+                        <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
+                        <span class="pcoded-mtext" data-i18n="nav.dash.main">Danh mục</span>
+                        <span class="pcoded-mcaret"></span>
+                    </a>
+                </li>
                 <li>
                     <a href="/admin/product" class="waves-effect waves-dark">
                         <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
-                        <span class="pcoded-mtext" data-i18n="nav.dash.main">Sản phẩm</span>
+                        <span class="pcoded-mtext" data-i18n="nav.dash.main">Danh sách sản phẩm</span>
                         <span class="pcoded-mcaret"></span>
                     </a>
                 </li>
@@ -258,6 +265,6 @@
                 </li>
             </ul>
         </div>
-    </nav>
+    </nav> 
 </body>
 </html>

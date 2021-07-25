@@ -70,9 +70,9 @@
 										<!-- Hover table card start -->
 										<div class="card">
 											<div class="card-header">
-												<h3>Danh sách sản phẩm</h3>
+												<h3>Danh mục</h3>
 												<div class="card-header-right">
-												<button class="btn btn-primary btn-round waves-effect waves-light" @click="add('Thêm sản phẩm')" data-toggle="modal" data-target=".bd-example-modal-lg">Thêm sản phẩm</button>
+													<button class="btn btn-primary btn-round waves-effect waves-light" @click="add('Thêm danh mục')" data-toggle="modal" data-target=".bd-example-modal-lg">Thêm danh mục</button>
 													<ul class="list-unstyled card-option">
 														<li><i class="fa fa fa-wrench open-card-option"></i></li>
 														<li><i class="fa fa-window-maximize full-card"></i></li>
@@ -88,31 +88,28 @@
 														<thead>
 															<tr>
 																<th>STT</th>
-																<th>Tên sản phẩm</th>
-																<th>Phân loại</th>
+																<th>Tên danh mục</th>
 																<th>Mô tả</th>
 																<th>Công cụ</th>
 															</tr>
 														</thead>
 														<tbody>
-															<tr v-for="(product,index) in products">
-																<th scope="row" > {{ index + 1 }} </th>
-																<td >{{ product.productName }}</td>
-																<td >{{ product.category.categoryName }}</td>
-																<td >{{ product.description }}</td>
+															<tr v-for="(category,index) in categorys" >
+																<th scope="row"> {{ index+1 }} </th>
+																<td> {{ category.categoryName }} </td>
+																<td> {{ category.description }} </td>
 																<td>
-																	<a data-toggle="modal" data-target=".bd-example-modal-lg" class="icon-tool" @click="edit(index, 'Chỉnh sửa sản phẩm')"><i class="ti-pencil"></i></a> 
-																	<a data-toggle="modal" data-target=".bd-example-modal-md" class="icon-tool" @click="remove(product.idProduct)"><i class="ti-trash"></i></a>
-																</td>
+																	<a data-toggle="modal" data-target=".bd-example-modal-lg" class="icon-tool" @click="edit(index, 'Chỉnh sửa danh mục')"><i class="ti-pencil"></i></a> 
+																	<a data-toggle="modal" data-target=".bd-example-modal-md" class="icon-tool" @click="remove(category.idCategory)"><i class="ti-trash"></i></a></td>
 															</tr>
 														</tbody>
 													</table>
-													 <div class="modal fade bd-example-modal-lg" tabindex="-1"
+													<div class="modal fade bd-example-modal-lg" tabindex="-1"
 														role="dialog" aria-labelledby="myLargeModalLabel"
 														aria-hidden="true">
 														<div class="modal-dialog modal-lg">
 															<div class="modal-content">
-																<form :action="link" th:object="${product}" method="post">
+																<form :action="link" th:object="${category}" method="post">
 																	<div class="modal-header">
 																		<h5 class="modal-title" id="exampleModalLongTitle">
 																			{{ title }}</h5>
@@ -123,27 +120,21 @@
 																	</div>
 																	<div class="modal-body">
 																		<div class="form-group row">
-																			<div class="col-sm-6 form-row">
-																				<h4>Tên sản phẩm</h4>
-																				<input type="text" class="form-control" th:field="*{productName}" v-model="p.productName">
-																				<input type="hidden" v-if="link == 'editProduct'"  v-model="p.idProduct" th:field="*{idProduct}">
+																			<div class="col-sm-6">
+																				<h4>Tên danh mục</h4>
+																				<input type="text" class="form-control" th:field="*{categoryName}"
+																					v-model="c.categoryName">
+																				<input type="hidden" v-if="link == 'editCategory'" th:field="*{idCategory}" v-model="c.idCategory">
 																			</div>
-																			<div class="col-sm-6 form-row">
-																				<h4>Phân loại</h4>
-																					<select class="form-control select" th:field="*{category}" v-model="p.category.idCategory">
-																						<option th:each="category : ${categorys}" th:value="${category.idCategory}" th:text="${category.categoryName}"></option>
-																					</select>
-																			</div>
-																			<div class="col-sm-6 form-row">
+																			<div class="col-sm-6">
 																				<h4>Mô tả</h4>
 																				<input type="text" class="form-control" th:field="*{description}"
-																					v-model="p.description">
+																					v-model="c.description">
 																			</div>
 																		</div>
 																	</div>
 																	<div class="modal-footer">
-																		<button type="button" class="btn btn-secondary"
-																			data-dismiss="modal">Đóng</button>
+																		<button type="button" class="btn btn-secondary" data-dismiss="modal" @click="c = {}">Đóng</button>
 																		<button type="submit" class="btn btn-primary">Lưu</button>
 																	</div>
 																</form>
@@ -155,10 +146,10 @@
 														aria-hidden="true">
 														<div class="modal-dialog modal-lg">
 															<div class="modal-content">
-																<form action="deleteProduct" method="post">
+																<form action="deleteColor" method="post">
 																	<div class="modal-header">
 																		<h5 class="modal-title" id="exampleModalLongTitle">
-																			Xác nhận xóa sản phẩm?</h5>
+																			Xác nhận xóa danh sách?</h5>
 																		<button type="button" class="close"
 																			data-dismiss="modal" aria-label="Close">
 																			<span aria-hidden="true">&times;</span>
@@ -166,14 +157,13 @@
 																	</div>
 																	<input type="hidden" name="id" v-model="id">	
 																	<div class="modal-footer">
-																		<button type="button" class="btn btn-secondary"
-																			data-dismiss="modal">Đóng</button>
+																		<button type="button" class="btn btn-secondary" data-dismiss="modal" @click="id = 0">Đóng</button>
 																		<button type="submit" class="btn btn-primary">Xóa</button>
 																	</div>
 																</form>
 															</div>
 														</div>
-													</div> 
+													</div>
 												</div>
 											</div>
 										</div>
@@ -196,33 +186,28 @@
     var app= new Vue({
   		el: '#app',
         data: {
-      			products: [],
-      			p: {
-      				category: {
-      					categoryName: ''
-      				}
-      			},
+        		categorys: [],
+      			c: {},
       			title: '',
       			link: '',
       			id: 0
   			  },
         methods: {
             edit(index, title) {
-                this.p = JSON.parse(JSON.stringify(this.products[index]));
-                console.log(this.p);
+                this.c = JSON.parse(JSON.stringify(this.categorys[index]));
                 this.title = title;
-                this.link = 'editProduct';
+                this.link = 'editCategory';
             },
             add(title) {
             	this.title = title;
-            	this.link = 'addProduct';
+            	this.link = 'addCategory';
             },
             remove(id) {
             	this.id = id;
             }
         },
         mounted() {
-            this.products = [[${products}]];
+            this.categorys = [[${categorys}]];
         }
   })  
 </script>

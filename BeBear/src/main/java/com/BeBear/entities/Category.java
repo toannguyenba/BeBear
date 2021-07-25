@@ -2,6 +2,9 @@ package com.BeBear.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import org.hibernate.annotations.UpdateTimestamp;
+
 import java.util.Date;
 import java.util.List;
 
@@ -28,15 +31,16 @@ public class Category implements Serializable {
 	@Column(name="status")
 	private int status;
 	
-//	@OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
-//	private List<Product> products;
+	@OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
+	private List<Product> products;
 
 	@Column(name="updatedatetime")
 	@Temporal(TemporalType.TIMESTAMP)
+	@UpdateTimestamp
 	private Date updateDatetime;
 
 	@Column(name="updater")
-	private String updater;
+	private String updater = "SystemAdmin";
 
 	public Category() {
 	}

@@ -16462,3 +16462,7 @@ body.dark {
 	margin: 0 10px 0 0;
 	cursor: pointer;
 }
+
+.form-row {
+	margin: 0 0 15px 0;
+}
