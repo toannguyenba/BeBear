@@ -5,7 +5,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<nav class="pcoded-navbar" id="app">
+	<nav class="pcoded-navbar">
         <div class="sidebar_toggle"><a href="#"><i class="icon-close icons"></i></a></div>
         <div class="pcoded-inner-navbar main-menu">
             <div class="">
@@ -58,7 +58,7 @@
                         <span class="pcoded-mcaret"></span>
                     </a>
                 </li>
-                <li>
+                <li th:class="${page} == 'color' ? 'active' : ''">
                     <a href="/admin/color" class="waves-effect waves-dark">
                         <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
                         <span class="pcoded-mtext" data-i18n="nav.dash.main">Danh sách màu</span>
