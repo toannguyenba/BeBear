@@ -72,7 +72,10 @@
 											<div class="card-header">
 												<h3>Danh sách màu</h3>
 												<div class="card-header-right">
-													<button class="btn btn-primary btn-round waves-effect waves-light" @click="add('Thêm màu sắc')" data-toggle="modal" data-target=".bd-example-modal-lg">Thêm màu sắc</button>
+													<button
+														class="btn btn-primary btn-round waves-effect waves-light"
+														@click="add('Thêm màu sắc')" data-toggle="modal"
+														data-target=".bd-example-modal-lg">Thêm màu sắc</button>
 													<ul class="list-unstyled card-option">
 														<li><i class="fa fa fa-wrench open-card-option"></i></li>
 														<li><i class="fa fa-window-maximize full-card"></i></li>
@@ -84,26 +87,44 @@
 											</div>
 											<div class="card-block table-border-style">
 												<div class="table-responsive">
-													<table class="table table-hover">
-														<thead>
+													<table class="table table-sm table-striped table-hover table-bordered">
+														<thead style="background-color: #00b8e6;">
 															<tr>
-																<th>ID</th>
+																<th style="width: 5%;">ID</th>
 																<th>Tên màu</th>
 																<th>Mô tả</th>
 																<th>Công cụ</th>
 															</tr>
 														</thead>
 														<tbody>
-															<tr v-for="(color,index) in colors" >
-																<th scope="row"> {{ index+1 }} </th>
-																<td> {{ color.colorName }} </td>
-																<td> {{ color.description }} </td>
-																<td>
-																	<a data-toggle="modal" data-target=".bd-example-modal-lg" class="icon-tool" @click="edit(index, 'Chỉnh sửa màu sắc')"><i class="ti-pencil"></i></a> 
-																	<a data-toggle="modal" data-target=".bd-example-modal-md" class="icon-tool" @click="remove(color.idColor)"><i class="ti-trash"></i></a></td>
+															<tr v-for="(color,index) in colors">
+																<th scope="row">{{ index+1 }}</th>
+																<td>{{ color.colorName }}</td>
+																<td>{{ color.description }}</td>
+																<td><a data-toggle="modal"
+																	data-target=".bd-example-modal-lg" class="icon-tool"
+																	@click="edit(index, 'Chỉnh sửa màu sắc')"><i
+																		class="ti-pencil"></i></a> <a data-toggle="modal"
+																	data-target=".bd-example-modal-md" class="icon-tool"
+																	@click="remove(color.idColor)"><i class="ti-trash"></i></a></td>
 															</tr>
 														</tbody>
 													</table>
+													<br/>
+													<nav aria-label="Page navigation example">
+														<ul class="pagination pagination-sm justify-content-center">
+															<li class="page-item"><a class="page-link" href="/admin/color?currentPage=1"
+																aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+																	<span class="sr-only">First</span>
+															</a></li>
+															<li class="page-item" th:each="number: ${#numbers.sequence({pageUtil.firstPage}, {pageUtil.lastPage})}"><a class="page-link" th:href="@{/admin/color(currentPage=${number})}" th:text="${number}"></a></li>
+															
+															<li class="page-item"><a class="page-link" th:href="@{/admin/color/(currentPage=${pageUtil.totalPage})}"
+																aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+																	<span class="sr-only">End</span>
+															</a></li>
+														</ul>
+													</nav>
 													<div class="modal fade bd-example-modal-lg" tabindex="-1"
 														role="dialog" aria-labelledby="myLargeModalLabel"
 														aria-hidden="true">
@@ -122,14 +143,15 @@
 																		<div class="form-group row">
 																			<div class="col-sm-6">
 																				<h4>Tên màu</h4>
-																				<input type="text" class="form-control" th:field="*{colorName}"
-																					v-model="c.colorName">
-																				<input type="hidden" v-if="link == 'editColor'" th:field="*{idColor}" v-model="c.idColor">
+																				<input type="text" class="form-control"
+																					th:field="*{colorName}" v-model="c.colorName">
+																				<input type="hidden" v-if="link == 'editColor'"
+																					th:field="*{idColor}" v-model="c.idColor">
 																			</div>
 																			<div class="col-sm-6">
 																				<h4>Mô tả</h4>
-																				<input type="text" class="form-control" th:field="*{description}"
-																					v-model="c.description">
+																				<input type="text" class="form-control"
+																					th:field="*{description}" v-model="c.description">
 																			</div>
 																		</div>
 																	</div>
@@ -157,7 +179,7 @@
 																			<span aria-hidden="true">&times;</span>
 																		</button>
 																	</div>
-																	<input type="hidden" name="id" v-model="id">	
+																	<input type="hidden" name="id" v-model="id">
 																	<div class="modal-footer">
 																		<button type="button" class="btn btn-secondary"
 																			data-dismiss="modal">Đóng</button>
