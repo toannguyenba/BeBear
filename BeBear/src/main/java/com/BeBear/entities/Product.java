@@ -53,13 +53,13 @@ public class Product implements Serializable {
 	private List<Productphoto> idPhoto;
 	
 	@OneToMany(mappedBy = "idProduct")
-	private List<Productdetail> productdetail;
+	private List<ProductDetail> productdetail;
 
-	public List<Productdetail> getProductdetail() {
+	public List<ProductDetail> getProductdetail() {
 		return productdetail;
 	}
 
-	public void setProductdetail(List<Productdetail> productdetail) {
+	public void setProductdetail(List<ProductDetail> productdetail) {
 		this.productdetail = productdetail;
 	}
 

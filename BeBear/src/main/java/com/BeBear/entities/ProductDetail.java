@@ -11,7 +11,7 @@ import java.util.Date;
  */
 @Entity
 @NamedQuery(name="Productdetail.findAll", query="SELECT p FROM Productdetail p")
-public class Productdetail implements Serializable {
+public class ProductDetail implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -49,7 +49,7 @@ public class Productdetail implements Serializable {
     @Column(name = "updater")
 	private String updater;
 
-	public Productdetail() {
+	public ProductDetail() {
 	}
 
 	public int getIdProductDetail() {
