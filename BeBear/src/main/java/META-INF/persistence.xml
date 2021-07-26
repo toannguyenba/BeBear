@@ -9,8 +9,8 @@
 		<class>com.BeBear.entities.OrderdetailPK</class>
 		<class>com.BeBear.entities.Order</class>
 		<class>com.BeBear.entities.Product</class>
-		<class>com.BeBear.entities.Productdetail</class>
 		<class>com.BeBear.entities.Productphoto</class>
 		<class>com.BeBear.entities.Size</class>
+		<class>com.BeBear.entities.ProductDetail</class>
 	</persistence-unit>
 </persistence>
