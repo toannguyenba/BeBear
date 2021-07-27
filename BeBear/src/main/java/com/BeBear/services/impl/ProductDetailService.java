@@ -25,8 +25,8 @@ public class ProductDetailService implements IProductDetailService {
 
 	@Override
 	public boolean saveProductDetail(ProductDetail productDetail) {
-		// TODO Auto-generated method stub
-		return false;
+		ProductDetail result = proDetailRepository.save(productDetail);
+		return result != null ? true : false;
 	}
 
 	@Override

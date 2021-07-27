@@ -74,8 +74,8 @@
 												<div class="card-header-right">
 													<button
 														class="btn btn-primary btn-round waves-effect waves-light"
-														@click="add('Thêm màu sắc')" data-toggle="modal"
-														data-target=".bd-example-modal-lg">Thêm màu sắc</button>
+														@click="add('Thêm chi tiết sản phẩm')" data-toggle="modal"
+														data-target=".bd-example-modal-lg">Thêm chi tiết sản phẩm</button>
 													<ul class="list-unstyled card-option">
 														<li><i class="fa fa fa-wrench open-card-option"></i></li>
 														<li><i class="fa fa-window-maximize full-card"></i></li>
@@ -90,20 +90,28 @@
 													<table class="table table-sm table-striped table-hover table-bordered">
 														<thead style="background-color: #00b8e6;">
 															<tr>
-																<th style="width: 5%;">ID</th>
-																<th>Tên màu</th>
-																<th>Mô tả</th>
+																<th style="width: 5%;">STT</th>
+																<th>Loại sản phẩm</th>
+																<th>Màu sắc</th>
+																<th>Kích thước</th>
+																<th>Giá</th>
+																<th>Giá sale</th>
+																<th>Trạng thái</th>
 																<th>Công cụ</th>
 															</tr>
 														</thead>
 														<tbody>
-															<tr v-for="(color,index) in colors">
+															<tr v-for="(pro,index) in productDetails">
 																<th scope="row">{{ index+1 }}</th>
-																<td>{{ color.colorName }}</td>
-																<td>{{ color.description }}</td>
+																<td>{{ pro.idProduct.productName }}</td>
+																<td>{{ pro.idColor.colorName }}</td>
+																<td>{{ pro.idSize.sizeName }}</td>
+																<td>{{ pro.price }}</td>
+																<td>{{ pro.priceSale }}</td>
+																<td>{{ pro.status }}</td>
 																<td><a data-toggle="modal"
 																	data-target=".bd-example-modal-lg" class="icon-tool"
-																	@click="edit(index, 'Chỉnh sửa màu sắc')"><i
+																	@click="edit(index, 'Chỉnh sửa chi tiết sản phẩm')"><i
 																		class="ti-pencil"></i></a> <a data-toggle="modal"
 																	data-target=".bd-example-modal-md" class="icon-tool"
 																	@click="remove(color.idColor)"><i class="ti-trash"></i></a></td>
@@ -130,7 +138,7 @@
 														aria-hidden="true">
 														<div class="modal-dialog modal-lg">
 															<div class="modal-content">
-																<form :action="link" th:object="${color}" method="post">
+																<form :action="link" th:object="${productDetail}" method="post">
 																	<div class="modal-header">
 																		<h5 class="modal-title" id="exampleModalLongTitle">
 																			{{ title }}</h5>
@@ -142,24 +150,43 @@
 																	<div class="modal-body">
 																		<div class="form-group row">
 																			<div class="col-sm-6">
-																				<h4>Tên màu</h4>
+																				<h4>Giá</h4>
 																				<input type="text" class="form-control"
-																					th:field="*{colorName}" v-model="c.colorName">
-																				<input type="hidden" v-if="link == 'editColor'"
-																					th:field="*{idColor}" v-model="c.idColor">
+																					th:field="*{price}" v-model="p.price">
+																				<input type="hidden" v-if="link == 'editProductDetail'"
+																					th:field="*{idProductDetail}" v-model="p.idProductDetail">
 																			</div>
 																			<div class="col-sm-6">
-																				<h4>Mô tả</h4>
+																				<h4>Số lượng</h4>
 																				<input type="text" class="form-control"
-																					th:field="*{description}" v-model="c.description">
+																					th:field="*{quantity}" v-model="p.quantity">
+																			</div>
+																			<div class="col-sm-6">
+																				<h4>Sản phẩm</h4>
+																				<input type="text" class="form-control" th:field="*{idProduct}">
+																			</div>
+																			<div class="col-sm-6">
+																				<h4>Màu sắc</h4>
+																				<input type="text" class="form-control" th:field="*{idColor}">
+																			</div>
+																			<div class="col-sm-6">
+																				<h4>Kích thước</h4>
+																				<input type="text" class="form-control" th:field="*{idSize}">
+																			</div>
+																			<div class="col-sm-6">
+																				<h4>Giá sale</h4>
+																				<input type="text" class="form-control" th:field="*{salePrice}" placeholder="Nhập giá sale">
+																			</div>
+																			<div class="col-sm-6">
+																				<h4>Trạng thái</h4>
+																				<input type="text" class="form-control" th:field="*{status}" placeholder="Nhập trạng thái">
 																			</div>
 																		</div>
 																	</div>
 																	<div class="modal-footer">
 																		<button type="button" class="btn btn-secondary"
-																			data-dismiss="modal">Close</button>
-																		<button type="submit" class="btn btn-primary">Save
-																			changes</button>
+																			data-dismiss="modal">Đóng</button>
+																		<button type="submit" class="btn btn-primary">Lưu</button>
 																	</div>
 																</form>
 															</div>
@@ -189,7 +216,7 @@
 															</div>
 														</div>
 													</div>
-												</div>
+												</div> 
 											</div>
 										</div>
 										<!-- Hover table card end -->
@@ -212,17 +239,14 @@
   		el: '#app',
         data: {
         		productDetails: [],
-      			p: {
-      				colorName: '',
-      				description: ''      				
-      			},
+      			p: {},
       			title: '',
       			link: '',
       			id: 0
   			  },
         methods: {
             edit(index, title) {
-                this.c = JSON.parse(JSON.stringify(this.colors[index]));
+                this.p = JSON.parse(JSON.stringify(this.productDetails[index]));
                 this.title = title;
                 this.link = 'editProductDetail';
             },

@@ -2,6 +2,9 @@ package com.BeBear.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import org.hibernate.annotations.UpdateTimestamp;
+
 import java.util.Date;
 
 
@@ -44,10 +47,11 @@ public class ProductDetail implements Serializable {
 
     @Column(name = "updateDatetime")
 	@Temporal(TemporalType.TIMESTAMP)
+    @UpdateTimestamp
 	private Date updateDatetime;
 
     @Column(name = "updater")
-	private String updater;
+	private String updater = "Admin";
 
 	public ProductDetail() {
 	}

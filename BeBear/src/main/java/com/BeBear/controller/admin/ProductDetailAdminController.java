@@ -10,7 +10,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.BeBear.entities.ProductDetail;
 import com.BeBear.services.impl.ProductDetailService;
@@ -39,5 +42,20 @@ public class ProductDetailAdminController {
 		//Tạo mới một productDetail
 		model.addAttribute("productDetail", new ProductDetail());
 		return "admin/productDetail";
+	}
+	
+	@PostMapping("/admin/addProductDetail")
+	public String addProductDetail (@ModelAttribute("productDetail") ProductDetail productDetail, RedirectAttributes redirectAtt) {
+		try {
+			boolean result = proDetailService.saveProductDetail(productDetail);
+			if (result) {
+				redirectAtt.addAttribute("message", "Thêm mới thành công");			
+			} else {
+				redirectAtt.addAttribute("message", "Thêm mới thất bại");	
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return "redirect:/admin/productDetail";
 	}
 }
