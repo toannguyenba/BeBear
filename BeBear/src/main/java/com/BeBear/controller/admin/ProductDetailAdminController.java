@@ -18,6 +18,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.BeBear.entities.ProductDetail;
 import com.BeBear.services.impl.ProductDetailService;
 import com.BeBear.utils.PageUtil;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * @author bn

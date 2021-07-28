@@ -39,10 +39,10 @@ public class ProductAdminController {
 //			System.out.println(products.get(0).getIdPhoto());
 			
 			// Xử lý tạm thời
-			for(Product temp: products ) {
-				temp.setIdPhoto(null);
-				temp.setProductdetail(null);
-			}
+//			for(Product temp: products ) {
+//				temp.setIdPhoto(null);
+//				temp.setProductdetail(null);
+//			}
 			// end
 			model.addAttribute("products", products);
 			model.addAttribute("categorys", categorys);

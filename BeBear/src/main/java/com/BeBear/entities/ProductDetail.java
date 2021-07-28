@@ -22,15 +22,15 @@ public class ProductDetail implements Serializable {
 	private int idProductDetail;
 
     @ManyToOne
-    @JoinColumn(name = "idcolor",insertable=false, updatable=false)
+    @JoinColumn(name = "idcolor")
 	private Color idColor;
 
     @ManyToOne
-    @JoinColumn(name = "idproduct",insertable=false, updatable=false)
+    @JoinColumn(name = "idProduct")
 	private Product idProduct;
 
     @ManyToOne
-    @JoinColumn(name = "idsize",insertable=false, updatable=false)
+    @JoinColumn(name = "idsize")
 	private Size idSize;
 
     @Column(name = "price")

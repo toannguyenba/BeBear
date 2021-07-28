@@ -107,14 +107,14 @@
 																<td>{{ pro.idColor.colorName }}</td>
 																<td>{{ pro.idSize.sizeName }}</td>
 																<td>{{ pro.price }}</td>
-																<td>{{ pro.priceSale }}</td>
+																<td>{{ pro.salePrice }}</td>
 																<td>{{ pro.status }}</td>
 																<td><a data-toggle="modal"
 																	data-target=".bd-example-modal-lg" class="icon-tool"
 																	@click="edit(index, 'Chỉnh sửa chi tiết sản phẩm')"><i
 																		class="ti-pencil"></i></a> <a data-toggle="modal"
 																	data-target=".bd-example-modal-md" class="icon-tool"
-																	@click="remove(color.idColor)"><i class="ti-trash"></i></a></td>
+																	@click="remove(pro.idProductDetail)"><i class="ti-trash"></i></a></td>
 															</tr>
 														</tbody>
 													</table>
@@ -216,7 +216,7 @@
 															</div>
 														</div>
 													</div>
-												</div> 
+												</div>  
 											</div>
 										</div>
 										<!-- Hover table card end -->
@@ -260,6 +260,7 @@
         },
         mounted() {
             this.productDetails = [[${productDetails}]];
+            console.log(this.productDetails);
         }
   })  
 </script>

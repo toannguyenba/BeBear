@@ -16,6 +16,9 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 /**
  * The persistent class for the product database table.
@@ -53,6 +56,7 @@ public class Product implements Serializable {
 	private List<Productphoto> idPhoto;
 	
 	@OneToMany(mappedBy = "idProduct")
+	@JsonIgnoreProperties(value = "idProduct")
 	private List<ProductDetail> productdetail;
 
 	public List<ProductDetail> getProductdetail() {
