@@ -25,7 +25,7 @@ public class ColorAdminController {
 	@GetMapping("/admin/color")
 	public String listColor(@RequestParam(name = "currentPage", defaultValue = "1")int currentPage, Model model) {
 		model.addAttribute("page", "color");
-		Page<Color> pageColor = colorService.findAllColor(currentPage);
+		Page<Color> pageColor = colorService.findColorPage(currentPage);
 		PageUtil pageUtil = new PageUtil(currentPage, pageColor.getTotalPages(), 10);
 		model.addAttribute("pageUtil", pageUtil);
 		List<Color> colors = pageColor.getContent();

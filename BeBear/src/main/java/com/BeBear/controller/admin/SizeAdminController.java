@@ -22,6 +22,7 @@ public class SizeAdminController {
 	
 	@GetMapping("/admin/size")
 	public String listSize(Model model) {
+		model.addAttribute("page", "size");
 		model.addAttribute("sizes", sizeService.findAllSize());
 		model.addAttribute("size", new Size());
 		return "admin/size";

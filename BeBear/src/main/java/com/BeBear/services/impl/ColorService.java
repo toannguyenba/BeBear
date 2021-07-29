@@ -1,5 +1,7 @@
 package com.BeBear.services.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -17,7 +19,7 @@ public class ColorService implements IColorService {
 	ColorRepository colorRepo;
 
 	@Override
-	public Page<Color> findAllColor(int currentPage) {
+	public Page<Color> findColorPage(int currentPage) {
 		Pageable pageable = PageRequest.of(currentPage - 1, 10);
 		Page<Color> pageColor = colorRepo.findAll(pageable);
 		return pageColor;
@@ -33,5 +35,11 @@ public class ColorService implements IColorService {
 	public boolean saveColor(Color color) {
 		Color result = colorRepo.save(color);
 		return result != null ? true : false;
+	}
+
+	@Override
+	public List<Color> findAllColor() {
+		List<Color> colors = colorRepo.findAll();
+		return colors;
 	}
 }

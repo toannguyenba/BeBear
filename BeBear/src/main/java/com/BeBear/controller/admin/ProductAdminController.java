@@ -36,14 +36,7 @@ public class ProductAdminController {
 		try {
 			List<Product> products = productService.findAllProduct();
 			List<Category> categorys = categoryService.findAllCategory();
-//			System.out.println(products.get(0).getIdPhoto());
-			
-			// Xử lý tạm thời
-//			for(Product temp: products ) {
-//				temp.setIdPhoto(null);
-//				temp.setProductdetail(null);
-//			}
-			// end
+			model.addAttribute("page", "product");
 			model.addAttribute("products", products);
 			model.addAttribute("categorys", categorys);
 			model.addAttribute("product", new Product());

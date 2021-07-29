@@ -67,6 +67,13 @@
 								<div class="page-wrapper">
 									<!-- Page-body start -->
 									<div class="page-body">
+		                              <div class="main-search morphsearch-search">
+		                                  <div class="input-group">
+		                                      <span class="input-group-addon search-close">Tìm kiếm: </span>
+		                                      <input type="text" class="form-control">
+		                                      <span class="input-group-addon search-btn"><i class="ti-search"></i></span>
+		                                  </div>
+		                              </div>
 										<!-- Hover table card start -->
 										<div class="card">
 											<div class="card-header">
@@ -88,7 +95,7 @@
 											<div class="card-block table-border-style">
 												<div class="table-responsive">
 													<table class="table table-sm table-striped table-hover table-bordered">
-														<thead style="background-color: #00b8e6;">
+														<thead style="background-color: #448aff;color: white">
 															<tr>
 																<th style="width: 5%;">STT</th>
 																<th>Loại sản phẩm</th>
@@ -108,7 +115,7 @@
 																<td>{{ pro.idSize.sizeName }}</td>
 																<td>{{ pro.price }}</td>
 																<td>{{ pro.salePrice }}</td>
-																<td>{{ pro.status }}</td>
+																<td>{{ status[index] }}</td>
 																<td><a data-toggle="modal"
 																	data-target=".bd-example-modal-lg" class="icon-tool"
 																	@click="edit(index, 'Chỉnh sửa chi tiết sản phẩm')"><i
@@ -163,54 +170,40 @@
 																			</div>
 																			<div class="col-sm-6">
 																				<h4>Sản phẩm</h4>
-																				<input type="text" class="form-control" th:field="*{idProduct}">
+																				<select type="text" class="form-control" th:field="*{idProduct}" v-model="p.idProduct.idProduct">
+																					<option th:each="product : ${products}" th:value="${product.idProduct}" th:text="${product.productName}"></option>
+																				</select>
 																			</div>
 																			<div class="col-sm-6">
 																				<h4>Màu sắc</h4>
-																				<input type="text" class="form-control" th:field="*{idColor}">
+																				<select type="text" class="form-control" th:field="*{idColor}" v-model="p.idColor.idColor">
+																					<option th:each="color : ${colors}" th:value="${color.idColor}" th:text="${color.colorName}"></option>
+																				</select>
 																			</div>
 																			<div class="col-sm-6">
 																				<h4>Kích thước</h4>
-																				<input type="text" class="form-control" th:field="*{idSize}">
+																				<select type="text" class="form-control" th:field="*{idSize}" v-model="p.idSize.idSize">
+																					<option th:each="size : ${sizes}" th:value="${size.idSize}" th:text="${size.sizeName}"></option>
+																				</select>
 																			</div>
 																			<div class="col-sm-6">
 																				<h4>Giá sale</h4>
-																				<input type="text" class="form-control" th:field="*{salePrice}" placeholder="Nhập giá sale">
+																				<input type="text" class="form-control" th:field="*{salePrice}" v-model="p.salePrice">
 																			</div>
 																			<div class="col-sm-6">
 																				<h4>Trạng thái</h4>
-																				<input type="text" class="form-control" th:field="*{status}" placeholder="Nhập trạng thái">
+																				<select class="form-control" th:field="*{status}" v-model="p.status">
+																					<option value="0">Normal</option>
+																					<option value="1">Hot</option>
+																					<option value="2">Sale</option>
+																				</select>
 																			</div>
 																		</div>
 																	</div>
 																	<div class="modal-footer">
-																		<button type="button" class="btn btn-secondary"
+																		<button type="button" class="btn btn-secondary" @click="close()"
 																			data-dismiss="modal">Đóng</button>
 																		<button type="submit" class="btn btn-primary">Lưu</button>
-																	</div>
-																</form>
-															</div>
-														</div>
-													</div>
-													<div class="modal fade bd-example-modal-md" tabindex="-1"
-														role="dialog" aria-labelledby="myLargeModalLabel"
-														aria-hidden="true">
-														<div class="modal-dialog modal-lg">
-															<div class="modal-content">
-																<form action="deleteColor" method="post">
-																	<div class="modal-header">
-																		<h5 class="modal-title" id="exampleModalLongTitle">
-																			Xác nhận xóa màu?</h5>
-																		<button type="button" class="close"
-																			data-dismiss="modal" aria-label="Close">
-																			<span aria-hidden="true">&times;</span>
-																		</button>
-																	</div>
-																	<input type="hidden" name="id" v-model="id">
-																	<div class="modal-footer">
-																		<button type="button" class="btn btn-secondary"
-																			data-dismiss="modal">Đóng</button>
-																		<button type="submit" class="btn btn-primary">Xóa</button>
 																	</div>
 																</form>
 															</div>
@@ -239,10 +232,15 @@
   		el: '#app',
         data: {
         		productDetails: [],
-      			p: {},
+      			p: {
+      				idProduct: {idProduct: ""},
+      				idColor: {idColor: ""},
+      				idSize: {idSize: ""}
+      			},
       			title: '',
       			link: '',
-      			id: 0
+      			id: 0,
+      			status: []
   			  },
         methods: {
             edit(index, title) {
@@ -254,13 +252,30 @@
             	this.title = title;
             	this.link = 'addProductDetail';
             },
-            remove(id) {
-            	this.id = id;
+            close() {
+            	this.p = {
+          				idProduct: {idProduct: ""},
+          				idColor: {idColor: ""},
+          				idSize: {idSize: ""}
+          			}
             }
         },
         mounted() {
             this.productDetails = [[${productDetails}]];
-            console.log(this.productDetails);
+            let self = this;
+            var list = this.productDetails
+             for(var i = 0; i < list.length; i++){
+                switch(list[i].status) {
+            	case 0:
+                	self.status[i] = "Normal";
+                	break;
+              	case 1:
+              		self.status[i] = "Hot";
+                	break;
+              	default:
+              		self.status[i] = "Sale";
+            	}
+            }
         }
   })  
 </script>
