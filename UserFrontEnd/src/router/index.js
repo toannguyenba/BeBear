@@ -27,7 +27,7 @@ const routes = [
         component: Contact
     },
     {
-        path: '/shop-single',
+        path: '/shop-single/:id',
         name: 'ShopSingle',
         component: ShopSingle
     }

@@ -25,8 +25,8 @@
     <nav class="navbar navbar-expand-lg navbar-light shadow">
         <div class="container d-flex justify-content-between align-items-center">
 
-            <a class="navbar-brand text-success logo h1 align-self-center" href="index.html">
-                Zay
+            <a class="navbar-brand text-success logo h1 align-self-center" href="/" style="height: 75.6px">
+                <img src="/src/assets/img/BeBear.png" style="height:100px; width:auto; overflow: hidden"/>
             </a>
 
             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#templatemo_main_nav" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -36,17 +36,8 @@
             <div class="align-self-center collapse navbar-collapse flex-fill  d-lg-flex justify-content-lg-between" id="templatemo_main_nav">
                 <div class="flex-fill">
                     <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="/">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/about">About</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/shop">Shop</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/contact">Contact</a>
+                        <li :class="menu.isActive ? 'nav-item active' : 'nav-item'" v-for="(menu, index) in menuTop" :key="index">
+                            <a class="nav-link" :href="menu.link"> {{ menu.name }} </a>
                         </li>
                     </ul>
                 </div>
@@ -94,3 +85,25 @@
         </div>
     </div>
 </template>
+
+<script>
+export default {
+    data() {
+        return {
+            menuTop: [
+                {name: 'Home', isActive: false, link: '/'},
+                {name: 'About', isActive: false, link: '/about'},
+                {name: 'Shop', isActive: false, link: '/shop'},
+                {name: 'Contact', isActive: false, link: '/contact'},
+                
+            ]
+        }
+    },
+    mounted() {
+        var self = this;
+        self.menuTop.forEach((m) => {
+            m.isActive = m.link == window.location.pathname;
+        })
+    }
+}
+</script>

@@ -186,6 +186,7 @@
                 </div>
             </div>
         </div>
+        {{ $route.params.id }}
     </section>
     <!-- Close Content -->
 
@@ -665,36 +666,13 @@
 
 <script>
 export default {
+    computed: {
+        productDetail() {
+          return this.$store.state.productDetail;
+        }
+    },
     mounted() {
-        $('#carousel-related-product').slick({
-            infinite: true,
-            arrows: false,
-            slidesToShow: 4,
-            slidesToScroll: 3,
-            dots: true,
-            responsive: [{
-                    breakpoint: 1024,
-                    settings: {
-                        slidesToShow: 3,
-                        slidesToScroll: 3
-                    }
-                },
-                {
-                    breakpoint: 600,
-                    settings: {
-                        slidesToShow: 2,
-                        slidesToScroll: 3
-                    }
-                },
-                {
-                    breakpoint: 480,
-                    settings: {
-                        slidesToShow: 2,
-                        slidesToScroll: 3
-                    }
-                }
-            ]
-        });
+        // console.log(this.$route.params.id);
     }
 }
 </script>
