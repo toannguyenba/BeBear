@@ -203,8 +203,9 @@
 </template>
 
 <script>
-
+import fetchData from "/src/modules/constant.js";
 export default {
+
   data() {
     return{
         pD: {
@@ -224,6 +225,9 @@ export default {
       detail: function() {
           
       }
+  },
+  mounted() {
+      fetchData.fetchAPI("");
   }
 }
 </script>

@@ -3,18 +3,28 @@
  */
 package com.BeBear.controller;
 
-import org.springframework.stereotype.Controller;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.BeBear.entities.Product;
+import com.BeBear.services.impl.ProductService;
 
 /**
  * @author bn
  *
  */
-@Controller
+@RestController
 public class HomeController {
+	
+	@Autowired
+	private ProductService productService;
 
-	@GetMapping("/")
-	public String index() {
-		return "index";
+	@GetMapping("/product")
+	public List<Product> index() {
+		List<Product> products = productService.findAllProduct();   
+		return products;
 	}
 }
