@@ -3,6 +3,8 @@
  */
 package com.BeBear.services;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 
 import com.BeBear.entities.ProductDetail;
@@ -17,4 +19,6 @@ public interface IProductDetailService {
 	public Page<ProductDetail> getAllProductDetail(int currentPage);
 	
 	public boolean deleteProductDetail(int id);
+	
+	public List<ProductDetail> findAll();
 }

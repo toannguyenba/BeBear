@@ -93,12 +93,12 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-12 col-md-4 p-5 mt-3">
+            <div class="col-12 col-md-4 p-5 mt-3" v-for="product in data" :key="product.idProduct">
                 <a href="/shop-single"><img src="/src/assets/img/category_img_01.jpg" class="rounded-circle img-fluid border"></a>
-                <h5 class="text-center mt-3 mb-3">Watches</h5>
-                <p class="text-center"><a :href="'/shop-single/' + id" class="btn btn-success" @click="detail">Go Shop</a></p>
+                <h5 class="text-center mt-3 mb-3"> {{ product.productName }} </h5>
+                <p class="text-center"><a :href="'/shop-single/' + product.idProduct" class="btn btn-success" @click="detail">Go Shop</a></p>
             </div>
-            <div class="col-12 col-md-4 p-5 mt-3">
+            <!-- <div class="col-12 col-md-4 p-5 mt-3">
                 <a href="/shop-single"><img src="/src/assets/img/category_img_02.jpg" class="rounded-circle img-fluid border"></a>
                 <h2 class="h5 text-center mt-3 mb-3">Shoes</h2>
                 <p class="text-center"><a href="/shop-single" class="btn btn-success">Go Shop</a></p>
@@ -107,7 +107,7 @@
                 <a href="/shop-single"><img src="/src/assets/img/category_img_03.jpg" class="rounded-circle img-fluid border"></a>
                 <h2 class="h5 text-center mt-3 mb-3">Accessories</h2>
                 <p class="text-center"><a href="/shop-single" class="btn btn-success">Go Shop</a></p>
-            </div>
+            </div> -->
         </div>
     </section>
     <!-- End Categories of The Month -->
@@ -213,7 +213,8 @@ export default {
             idColor: '4',
             idSize: '5'
         },
-        id: 7
+        id: 7,
+        data: []
     }
   },
   computed: {
@@ -226,8 +227,9 @@ export default {
           
       }
   },
-  mounted() {
-      fetchData.fetchAPI("");
+  async mounted() {
+      this.data = await fetchData.fetchAPI("");
+      console.log(this.data)
   }
 }
 </script>

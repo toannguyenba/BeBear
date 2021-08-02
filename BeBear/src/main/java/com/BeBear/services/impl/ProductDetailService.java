@@ -3,6 +3,8 @@
  */
 package com.BeBear.services.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -40,6 +42,12 @@ public class ProductDetailService implements IProductDetailService {
 	public boolean deleteProductDetail(int id) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public List<ProductDetail> findAll() {
+		List<ProductDetail> productDetails = proDetailRepository.findAll();
+		return productDetails;
 	}
 	
 }
