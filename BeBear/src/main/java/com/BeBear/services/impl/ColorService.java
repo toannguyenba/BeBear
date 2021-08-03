@@ -42,4 +42,10 @@ public class ColorService implements IColorService {
 		List<Color> colors = colorRepo.findAll();
 		return colors;
 	}
+
+	@Override
+	public List<Color> getListByIdProduct(int idProduct) {
+		List<Color> colors = colorRepo.getListByIdProduct(idProduct);
+		return colors;
+	}
 }

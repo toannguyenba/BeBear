@@ -23,5 +23,6 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
     
 //	@Query(value = "select p.idproduct, p.productname, c.CategoryName, p.description, p.updatedatetime, p.updater from product p left join category c on p.idcategory = c.idcategory")
 //    public List<Product> findAllProduct();
+	public Product findByIdProduct(int idProduct);
 	
 }

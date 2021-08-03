@@ -96,5 +96,7 @@ public class Color implements Serializable {
 	public void setUpdater(String updater) {
 		this.updater = updater;
 	}
+	
+	
 
 }

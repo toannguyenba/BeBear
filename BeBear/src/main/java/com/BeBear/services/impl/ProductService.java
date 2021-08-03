@@ -38,4 +38,10 @@ public class ProductService implements IProductService {
 		Product result = productRepo.save(product);
 		return result != null ? true : false;
 	}
+
+	@Override
+	public Product findByIdProduct(int idProduct) {
+		Product product = productRepo.findByIdProduct(idProduct);
+		return product;
+	}
 }

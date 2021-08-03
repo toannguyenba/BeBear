@@ -74,8 +74,9 @@ public class HomeController {
 	@GetMapping("/productDetail")
 	public List<ProductDetail> getProductDetail(@RequestParam("filter") int filter) {
 		List<ProductDetail> proDetails = new ArrayList<ProductDetail>(); 
+		Product product = productService.findByIdProduct(filter);
 		try {
-			proDetails = proDetailService.findAll();
+			proDetails = proDetailService.findProductDetailByIdProduct(product);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
@@ -83,10 +84,10 @@ public class HomeController {
 	}
 	
 	@GetMapping("/color")
-	public List<Color> getAllColor() {
+	public List<Color> getAllColor(@RequestParam("filter") int filter) {
 		List<Color> colors = new ArrayList<Color>(); 
 		try {
-			colors = colorService.findAllColor();
+			colors = colorService.getListByIdProduct(filter);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
