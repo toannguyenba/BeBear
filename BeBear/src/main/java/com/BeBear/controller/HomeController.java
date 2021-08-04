@@ -50,10 +50,21 @@ public class HomeController {
 	private SizeService sizeService;
 
 	@GetMapping("/product")
-	public List<Product> index() {
+	public List<Product> getAllProduct() {
 		List<Product> products = new ArrayList<Product>();
 		try {
 			products = productService.findAllProduct();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return products;
+	}
+	
+	@GetMapping("/productByIdCategory")
+	public List<Product> getProductByIdCategory(@RequestParam("filter") int filter) {
+		List<Product> products = new ArrayList<Product>();
+		try {
+			products = productService.findByIdCategory(filter);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
@@ -95,10 +106,10 @@ public class HomeController {
 	}
 	
 	@GetMapping("/size")
-	public List<Size> getSize() {
+	public List<Size> getSize(@RequestParam("filter") int filter) {
 		List<Size> sizes = new ArrayList<Size>(); 
 		try {
-			sizes = sizeService.findAllSize();
+			sizes = sizeService.findByIdProduct(filter);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}

@@ -40,4 +40,10 @@ public class SizeService implements ISizeService {
 		return false;
 	}
 
+	@Override
+	public List<Size> findByIdProduct(int idProduct) {
+		List<Size> sizes = sizeRepo.findByIdProduct(idProduct);
+		return sizes;
+	}
+
 }

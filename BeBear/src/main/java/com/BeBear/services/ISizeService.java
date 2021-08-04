@@ -17,4 +17,6 @@ public interface ISizeService {
 	public List<Size> findAllSize();
 	
 	public boolean deleteSize(int id);
+	
+	public List<Size> findByIdProduct(int idProduct);
 }

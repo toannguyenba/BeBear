@@ -1,9 +1,9 @@
-const apiRoot = 'http://localhost:8080';
+const apiRoot = 'http://localhost:8080/';
 
-const fetchData = {
-    async fetchAPI(link) {
+const getData = {
+    async fetchData(link) {
         let results;
-        await fetch('http://localhost:8080/product')
+        await fetch(apiRoot+ link)
         .then(res => res.json())
         .then(json => {
             results = json;
@@ -15,4 +15,4 @@ const fetchData = {
 
 
 
-export default fetchData
+export default getData

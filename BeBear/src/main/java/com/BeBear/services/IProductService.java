@@ -16,4 +16,6 @@ public interface IProductService {
 	public boolean deleteProductById(int id);
 	
 	public Product findByIdProduct(int idProduct);
+	
+	public List<Product> findByIdCategory(int idCategory);
 }

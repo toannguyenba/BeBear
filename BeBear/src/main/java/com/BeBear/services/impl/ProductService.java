@@ -44,4 +44,10 @@ public class ProductService implements IProductService {
 		Product product = productRepo.findByIdProduct(idProduct);
 		return product;
 	}
+
+	@Override
+	public List<Product> findByIdCategory(int idCategory) {
+		List<Product> products = productRepo.findByIdCategory(idCategory);
+		return products;
+	}
 }

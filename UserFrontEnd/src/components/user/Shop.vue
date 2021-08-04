@@ -6,9 +6,9 @@
             <div class="col-lg-3">
                 <h1 class="h2 pb-4">Categories</h1>
                 <ul class="list-unstyled templatemo-accordion">
-                    <li class="pb-3">
+                    <li class="pb-3" v-for="category in categorys" :key="category.idCategory">
                         <a class="collapsed d-flex justify-content-between h3 text-decoration-none" href="#">
-                            Gender
+                            {{ category.categoryName }}
                             <i class="fa fa-fw fa-chevron-circle-down mt-1"></i>
                         </a>
                         <ul class="collapse show list-unstyled pl-3">
@@ -66,7 +66,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-4" v-for="product in products" :key="product.idProduct">
                         <div class="card mb-4 product-wap rounded-0">
                             <div class="card rounded-0">
                                 <img class="card-img rounded-0 img-fluid" src="/src/assets/img/shop_01.jpg">
@@ -79,7 +79,7 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                <a href="/shop-single" class="h3 text-decoration-none">Oupidatat non</a>
+                                <a href="/shop-single" class="h3 text-decoration-none"> {{ product.productName }} </a>
                                 <ul class="w-100 list-unstyled d-flex justify-content-between mb-0">
                                     <li>M/L/X/XL</li>
                                     <li class="pt-2">
@@ -103,7 +103,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <!-- <div class="col-md-4">
                         <div class="card mb-4 product-wap rounded-0">
                             <div class="card rounded-0">
                                 <img class="card-img rounded-0 img-fluid" src="/src/assets/img/shop_02.jpg">
@@ -398,7 +398,7 @@
                                 <p class="text-center mb-0">$250.00</p>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
                 <div div="row">
                     <ul class="pagination pagination-lg justify-content-end">
@@ -523,3 +523,24 @@
     </section>
     <!--End Brands-->
 </template>
+
+<script>
+import getData from "/src/modules/constant.js"
+export default {
+    data() {
+        return {
+            categorys: [],
+            idCategory: null,
+            products: []
+        }
+    },
+
+    async mounted() {
+        this.categorys = await getData.fetchData("category");
+        this.idCategory = this.$route.params.idCategory;
+        this.products = await getData.fetchData("productByIdCategory?filter=" + this.idCategory);
+        console.log("category", this.categorys)
+        console.log("product", this.products)
+    }
+}
+</script>
