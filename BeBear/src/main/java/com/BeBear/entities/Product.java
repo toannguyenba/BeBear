@@ -16,9 +16,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 /**
  * The persistent class for the product database table.
@@ -51,9 +49,6 @@ public class Product implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "idcategory")
 	private Category category;
-	
-	@OneToMany(mappedBy = "idProduct")
-	private List<Productphoto> idPhoto;
 	
 	@OneToMany(mappedBy = "idProduct")
 	@JsonIgnoreProperties(value = "idProduct")
@@ -116,14 +111,6 @@ public class Product implements Serializable {
 
 	public void setUpdater(String updater) {
 		this.updater = updater;
-	}
-
-	public List<Productphoto> getIdPhoto() {
-		return idPhoto;
-	}
-
-	public void setIdPhoto(List<Productphoto> idPhoto) {
-		this.idPhoto = idPhoto;
 	}
 
 }

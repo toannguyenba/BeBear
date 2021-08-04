@@ -1,66 +1,84 @@
 package com.BeBear.entities;
 
 import java.io.Serializable;
-import javax.persistence.*;
+import java.util.Date;
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.UpdateTimestamp;
 
-import java.util.Date;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * The persistent class for the productdetail database table.
  * 
  */
 @Entity
-@NamedQuery(name="ProductDetail.findAll", query="SELECT p FROM ProductDetail p")
+@NamedQuery(name = "ProductDetail.findAll", query = "SELECT p FROM ProductDetail p")
 public class ProductDetail implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name = "idproductdetail")
-	private int idProductDetail;
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name = "idProductDetail")
+	private Integer idProductDetail;
 
-    @ManyToOne
-    @JoinColumn(name = "idcolor")
+	@ManyToOne
+	@JoinColumn(name = "idcolor")
 	private Color idColor;
 
-    @ManyToOne
-    @JoinColumn(name = "idProduct")
+	@ManyToOne
+	@JoinColumn(name = "idProduct")
 	private Product idProduct;
 
-    @ManyToOne
-    @JoinColumn(name = "idsize")
+	@ManyToOne
+	@JoinColumn(name = "idsize")
 	private Size idSize;
 
-    @Column(name = "price")
-	private float price;
+	@Column(name = "price")
+	private Float price;
 
-    @Column(name = "quantity")
-	private int quantity;
+	@Column(name = "quantity")
+	private Integer quantity;
 
-    @Column(name = "saleprice")
-	private float salePrice;
+	@Column(name = "saleprice")
+	private Float salePrice;
 
-    @Column(name = "status")
-	private int status;
+	@Column(name = "status")
+	private Integer status;
 
-    @Column(name = "updateDatetime")
+	@Column(name = "updateDatetime")
 	@Temporal(TemporalType.TIMESTAMP)
-    @UpdateTimestamp
+	@UpdateTimestamp
 	private Date updateDatetime;
 
-    @Column(name = "updater")
+	@Column(name = "updater")
 	private String updater = "Admin";
+
+	@OneToMany(mappedBy = "idProductDetail", cascade = CascadeType.ALL)
+	@JsonIgnore
+	private List<Productphoto> productPhotos;
 
 	public ProductDetail() {
 	}
 
-	public int getIdProductDetail() {
-		return this.idProductDetail;
+	public Integer getIdProductDetail() {
+		return idProductDetail;
 	}
 
-	public void setIdProductDetail(int idProductDetail) {
+	public void setIdProductDetail(Integer idProductDetail) {
 		this.idProductDetail = idProductDetail;
 	}
 
@@ -88,35 +106,35 @@ public class ProductDetail implements Serializable {
 		this.idSize = idSize;
 	}
 
-	public float getPrice() {
+	public Float getPrice() {
 		return price;
 	}
 
-	public void setPrice(float price) {
+	public void setPrice(Float price) {
 		this.price = price;
 	}
 
-	public int getQuantity() {
+	public Integer getQuantity() {
 		return quantity;
 	}
 
-	public void setQuantity(int quantity) {
+	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
 	}
 
-	public float getSalePrice() {
+	public Float getSalePrice() {
 		return salePrice;
 	}
 
-	public void setSalePrice(float salePrice) {
+	public void setSalePrice(Float salePrice) {
 		this.salePrice = salePrice;
 	}
 
-	public int getStatus() {
+	public Integer getStatus() {
 		return status;
 	}
 
-	public void setStatus(int status) {
+	public void setStatus(Integer status) {
 		this.status = status;
 	}
 
@@ -135,5 +153,14 @@ public class ProductDetail implements Serializable {
 	public void setUpdater(String updater) {
 		this.updater = updater;
 	}
+
+	public List<Productphoto> getProductPhotos() {
+		return productPhotos;
+	}
+
+	public void setProductPhotos(List<Productphoto> productPhotos) {
+		this.productPhotos = productPhotos;
+	}
+
 
 }

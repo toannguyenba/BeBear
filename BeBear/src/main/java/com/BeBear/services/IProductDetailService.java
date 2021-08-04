@@ -17,4 +17,5 @@ public interface IProductDetailService {
 	public Page<ProductDetail> getAllProductDetail(int currentPage);
 	
 	public boolean deleteProductDetail(int id);
+	
 }

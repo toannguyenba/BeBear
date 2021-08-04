@@ -1,7 +1,17 @@
 package com.BeBear.entities;
 
 import java.io.Serializable;
-import javax.persistence.*;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 /**
@@ -14,17 +24,24 @@ public class Productphoto implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "idphoto")
-	private int idPhoto;
+	private Integer idPhoto;
 
     @ManyToOne
-    @JoinColumn(name = "idproduct",insertable=false, updatable=false)
-	private Product idProduct;
+    @JoinColumn(name = "idProductDetail")
+    @JsonIgnore
+	private ProductDetail idProductDetail;
 
     @Column(name = "url")
 	private String url;
     
 	public Productphoto() {
+	}
+	
+	public Productphoto(ProductDetail idProductDetail, String url) {
+		this.idProductDetail = idProductDetail;
+		this.url = url;
 	}
 
 	public int getIdPhoto() {
@@ -35,12 +52,12 @@ public class Productphoto implements Serializable {
 		this.idPhoto = idPhoto;
 	}
 
-	public Product getIdProduct() {
-		return idProduct;
+	public ProductDetail getIdProduct() {
+		return idProductDetail;
 	}
 
-	public void setIdProduct(Product idProduct) {
-		this.idProduct = idProduct;
+	public void setIdProduct(ProductDetail idProductDetail) {
+		this.idProductDetail = idProductDetail;
 	}
 
 	public String getUrl() {

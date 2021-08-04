@@ -3,6 +3,8 @@
  */
 package com.BeBear.services.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -25,8 +27,14 @@ public class ProductDetailService implements IProductDetailService {
 
 	@Override
 	public boolean saveProductDetail(ProductDetail productDetail) {
-		ProductDetail result = proDetailRepository.save(productDetail);
-		return result != null ? true : false;
+		//Kiem tra productDetail da ton tai chua
+		List<ProductDetail> pds = proDetailRepository.findByIdProductAndIdColorAndIdSize(productDetail.getIdProduct(), productDetail.getIdColor(), productDetail.getIdSize());
+		if (pds == null || pds.isEmpty()) {
+			ProductDetail result = proDetailRepository.save(productDetail);
+			return result != null ? true : false;
+		} else {
+			return false;
+		}
 	}
 
 	@Override

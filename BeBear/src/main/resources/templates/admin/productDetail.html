@@ -67,13 +67,14 @@
 								<div class="page-wrapper">
 									<!-- Page-body start -->
 									<div class="page-body">
-		                              <div class="main-search morphsearch-search">
-		                                  <div class="input-group">
-		                                      <span class="input-group-addon search-close">Tìm kiếm: </span>
-		                                      <input type="text" class="form-control">
-		                                      <span class="input-group-addon search-btn"><i class="ti-search"></i></span>
-		                                  </div>
-		                              </div>
+										<div class="main-search morphsearch-search">
+											<div class="input-group">
+												<span class="input-group-addon search-close">Tìm
+													kiếm: </span> <input type="text" class="form-control"> <span
+													class="input-group-addon search-btn"><i
+													class="ti-search"></i></span>
+											</div>
+										</div>
 										<!-- Hover table card start -->
 										<div class="card">
 											<div class="card-header">
@@ -82,7 +83,8 @@
 													<button
 														class="btn btn-primary btn-round waves-effect waves-light"
 														@click="add('Thêm chi tiết sản phẩm')" data-toggle="modal"
-														data-target=".bd-example-modal-lg">Thêm chi tiết sản phẩm</button>
+														data-target=".bd-example-modal-lg">Thêm chi tiết
+														sản phẩm</button>
 													<ul class="list-unstyled card-option">
 														<li><i class="fa fa fa-wrench open-card-option"></i></li>
 														<li><i class="fa fa-window-maximize full-card"></i></li>
@@ -94,8 +96,9 @@
 											</div>
 											<div class="card-block table-border-style">
 												<div class="table-responsive">
-													<table class="table table-sm table-striped table-hover table-bordered">
-														<thead style="background-color: #448aff;color: white">
+													<table
+														class="table table-sm table-striped table-hover table-bordered">
+														<thead style="background-color: #448aff; color: white">
 															<tr>
 																<th style="width: 5%;">STT</th>
 																<th>Loại sản phẩm</th>
@@ -121,20 +124,31 @@
 																	@click="edit(index, 'Chỉnh sửa chi tiết sản phẩm')"><i
 																		class="ti-pencil"></i></a> <a data-toggle="modal"
 																	data-target=".bd-example-modal-md" class="icon-tool"
-																	@click="remove(pro.idProductDetail)"><i class="ti-trash"></i></a></td>
+																	@click="remove(pro.idProductDetail)"><i
+																		class="ti-trash"></i></a> <a data-toggle="modal"
+																	data-target=".bd-example-modal-md" class="icon-tool"
+																	@click="updateImage(pro.idProductDetail)"><i
+																		class="ti-image"></i></a></td>
 															</tr>
 														</tbody>
 													</table>
-													<br/>
+													<br />
 													<nav aria-label="Page navigation example">
-														<ul class="pagination pagination-sm justify-content-center">
-															<li class="page-item"><a class="page-link" href="/admin/color?currentPage=1"
-																aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-																	<span class="sr-only">First</span>
+														<ul
+															class="pagination pagination-sm justify-content-center">
+															<li class="page-item"><a class="page-link"
+																href="/admin/productDetail?currentPage=1" aria-label="Previous">
+																	<span aria-hidden="true">&laquo;</span> <span
+																	class="sr-only">First</span>
 															</a></li>
-															<li class="page-item" th:each="number: ${#numbers.sequence({pageUtil.firstPage}, {pageUtil.lastPage})}"><a class="page-link" th:href="@{/admin/color(currentPage=${number})}" th:text="${number}"></a></li>
-															
-															<li class="page-item"><a class="page-link" th:href="@{/admin/color/(currentPage=${pageUtil.totalPage})}"
+															<li class="page-item"
+																th:each="number: ${#numbers.sequence({pageUtil.firstPage}, {pageUtil.lastPage})}"><a
+																class="page-link"
+																th:href="@{/admin/productDetail(currentPage=${number})}"
+																th:text="${number}"></a></li>
+
+															<li class="page-item"><a class="page-link"
+																th:href="@{/admin/productDetail(currentPage=${pageUtil.totalPage})}"
 																aria-label="Next"> <span aria-hidden="true">&raquo;</span>
 																	<span class="sr-only">End</span>
 															</a></li>
@@ -145,7 +159,8 @@
 														aria-hidden="true">
 														<div class="modal-dialog modal-lg">
 															<div class="modal-content">
-																<form :action="link" th:object="${productDetail}" method="post">
+																<form :action="link" th:object="${productDetail}"
+																	method="post" enctype="multipart/form-data">
 																	<div class="modal-header">
 																		<h5 class="modal-title" id="exampleModalLongTitle">
 																			{{ title }}</h5>
@@ -159,57 +174,74 @@
 																			<div class="col-sm-6">
 																				<h4>Giá</h4>
 																				<input type="text" class="form-control"
-																					th:field="*{price}" v-model="p.price">
-																				<input type="hidden" v-if="link == 'editProductDetail'"
-																					th:field="*{idProductDetail}" v-model="p.idProductDetail">
+																					name="price" v-model="p.price"> <input
+																					type="hidden" v-if="link == 'editProductDetail'"
+																					name="productDetail.idProductDetail"
+																					v-model="p.idProductDetail">
 																			</div>
 																			<div class="col-sm-6">
 																				<h4>Số lượng</h4>
 																				<input type="text" class="form-control"
-																					th:field="*{quantity}" v-model="p.quantity">
+																					name="quantity" v-model="p.quantity">
 																			</div>
 																			<div class="col-sm-6">
 																				<h4>Sản phẩm</h4>
-																				<select type="text" class="form-control" th:field="*{idProduct}" v-model="p.idProduct.idProduct">
-																					<option th:each="product : ${products}" th:value="${product.idProduct}" th:text="${product.productName}"></option>
+																				<select type="text" class="form-control"
+																					th:field="*{idProduct}"
+																					v-model="p.idProduct.idProduct">
+																					<option th:each="product : ${products}"
+																						th:value="${product.idProduct}"
+																						th:text="${product.productName}"></option>
 																				</select>
 																			</div>
 																			<div class="col-sm-6">
 																				<h4>Màu sắc</h4>
-																				<select type="text" class="form-control" th:field="*{idColor}" v-model="p.idColor.idColor">
-																					<option th:each="color : ${colors}" th:value="${color.idColor}" th:text="${color.colorName}"></option>
+																				<select type="text" class="form-control"
+																					th:field="*{idColor}" v-model="p.idColor.idColor">
+																					<option th:each="color : ${colors}"
+																						th:value="${color.idColor}"
+																						th:text="${color.colorName}"></option>
 																				</select>
 																			</div>
 																			<div class="col-sm-6">
 																				<h4>Kích thước</h4>
-																				<select type="text" class="form-control" th:field="*{idSize}" v-model="p.idSize.idSize">
-																					<option th:each="size : ${sizes}" th:value="${size.idSize}" th:text="${size.sizeName}"></option>
+																				<select type="text" class="form-control"
+																					th:field="*{idSize}" v-model="p.idSize.idSize">
+																					<option th:each="size : ${sizes}"
+																						th:value="${size.idSize}"
+																						th:text="${size.sizeName}"></option>
 																				</select>
 																			</div>
 																			<div class="col-sm-6">
 																				<h4>Giá sale</h4>
-																				<input type="text" class="form-control" th:field="*{salePrice}" v-model="p.salePrice">
+																				<input type="text" class="form-control"
+																					name="salePrice" v-model="salePrice">
 																			</div>
 																			<div class="col-sm-6">
 																				<h4>Trạng thái</h4>
-																				<select class="form-control" th:field="*{status}" v-model="p.status">
+																				<select class="form-control" name="status"
+																					v-model="p.status">
 																					<option value="0">Normal</option>
 																					<option value="1">Hot</option>
 																					<option value="2">Sale</option>
 																				</select>
 																			</div>
+																			<div class="col-sm-6">
+																				<h4>Thêm ảnh</h4>
+																				<input type="file" name="file" multiple="multiple" />
+																			</div>
 																		</div>
 																	</div>
 																	<div class="modal-footer">
-																		<button type="button" class="btn btn-secondary" @click="close()"
-																			data-dismiss="modal">Đóng</button>
+																		<button type="button" class="btn btn-secondary"
+																			@click="close()" data-dismiss="modal">Đóng</button>
 																		<button type="submit" class="btn btn-primary">Lưu</button>
 																	</div>
 																</form>
 															</div>
 														</div>
 													</div>
-												</div>  
+												</div>
 											</div>
 										</div>
 										<!-- Hover table card end -->

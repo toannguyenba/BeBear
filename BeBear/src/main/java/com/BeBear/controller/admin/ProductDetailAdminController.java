@@ -3,29 +3,32 @@
  */
 package com.BeBear.controller.admin;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.BeBear.entities.Color;
 import com.BeBear.entities.Product;
 import com.BeBear.entities.ProductDetail;
+import com.BeBear.entities.Productphoto;
 import com.BeBear.entities.Size;
 import com.BeBear.services.impl.ColorService;
 import com.BeBear.services.impl.ProductDetailService;
 import com.BeBear.services.impl.ProductService;
 import com.BeBear.services.impl.SizeService;
+import com.BeBear.utils.FileUploadUtil;
 import com.BeBear.utils.PageUtil;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * @author bn
@@ -48,6 +51,8 @@ public class ProductDetailAdminController {
 	private List<Product> products;
 	private List<Color> colors;
 	private List<Size> sizes;
+	
+	private final String uploadPath = "C:\\upload\\product-photos";
 	
 	@GetMapping("/admin/productDetail")
 	public String getAllProductDetail (@RequestParam(name = "currentPage", defaultValue = "1")int currentPage, Model model) {
@@ -75,8 +80,20 @@ public class ProductDetailAdminController {
 	}
 	
 	@PostMapping("/admin/addProductDetail")
-	public String addProductDetail (@ModelAttribute("productDetail") ProductDetail productDetail, RedirectAttributes redirectAtt) {
+	public String addProductDetail (@ModelAttribute("productDetail") ProductDetail productDetail, @RequestParam("file") MultipartFile[] productPhotos, RedirectAttributes redirectAtt) {
 		try {
+			List<Productphoto> proPhotos = new ArrayList<Productphoto>();
+			// Save photos
+			for (MultipartFile productPhoto : productPhotos) {
+				String filename = StringUtils.cleanPath(productPhoto.getOriginalFilename());
+				String uploadDir = uploadPath + "\\" + productDetail.getIdProduct().getIdProduct();
+				FileUploadUtil.saveFile(uploadDir, filename, productPhoto);
+				Productphoto proPhoto = new Productphoto(productDetail, uploadDir + "\\" + filename);
+				proPhotos.add(proPhoto);
+			}
+			
+			productDetail.setProductPhotos(proPhotos);
+			
 			boolean result = proDetailService.saveProductDetail(productDetail);
 			if (result) {
 				redirectAtt.addAttribute("message", "Thêm mới thành công");			
@@ -84,7 +101,7 @@ public class ProductDetailAdminController {
 				redirectAtt.addAttribute("message", "Thêm mới thất bại");	
 			}
 		} catch (Exception e) {
-			System.out.println(e);
+			e.printStackTrace();
 		}
 		return "redirect:/admin/productDetail";
 	}
@@ -117,4 +134,5 @@ public class ProductDetailAdminController {
 		sizes = sizeService.findAllSize();
 		model.addAttribute("sizes", sizes);
 	}
+	
 }
