@@ -19,8 +19,6 @@ import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.UpdateTimestamp;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 /**
  * The persistent class for the productdetail database table.
  * 
@@ -68,7 +66,6 @@ public class ProductDetail implements Serializable {
 	private String updater = "Admin";
 
 	@OneToMany(mappedBy = "idProductDetail", cascade = CascadeType.ALL)
-	@JsonIgnore
 	private List<Productphoto> productPhotos;
 
 	public ProductDetail() {
