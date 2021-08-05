@@ -17,5 +17,5 @@ public interface IProductService {
 	
 	public Product findByIdProduct(int idProduct);
 	
-	public List<Product> findByIdCategory(int idCategory);
+	public List<Product> findProduct(String filter);
 }

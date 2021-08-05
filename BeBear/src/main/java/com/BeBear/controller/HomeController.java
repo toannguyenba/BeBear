@@ -48,23 +48,12 @@ public class HomeController {
 	
 	@Autowired
 	private SizeService sizeService;
-
-	@GetMapping("/product")
-	public List<Product> getAllProduct() {
-		List<Product> products = new ArrayList<Product>();
-		try {
-			products = productService.findAllProduct();
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
-		return products;
-	}
 	
-	@GetMapping("/productByIdCategory")
-	public List<Product> getProductByIdCategory(@RequestParam("filter") int filter) {
+	@GetMapping("/product")
+	public List<Product> getProductByIdCategory(@RequestParam(value = "filter", required = false) String filter) {
 		List<Product> products = new ArrayList<Product>();
 		try {
-			products = productService.findByIdCategory(filter);
+			products = productService.findProduct(filter);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}

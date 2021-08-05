@@ -3,6 +3,7 @@
  */
 package com.BeBear.services.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,8 +47,18 @@ public class ProductService implements IProductService {
 	}
 
 	@Override
-	public List<Product> findByIdCategory(int idCategory) {
-		List<Product> products = productRepo.findByIdCategory(idCategory);
+	public List<Product> findProduct(String filter) {
+		List<Product> products = new ArrayList<Product>();
+		try {
+			if (filter != null) {
+				int idCategory = Integer.parseInt(filter);
+				products = productRepo.findByIdCategory(idCategory);
+			} else {
+				products = productRepo.findAll();
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 		return products;
 	}
 }

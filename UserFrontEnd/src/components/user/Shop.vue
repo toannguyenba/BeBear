@@ -7,7 +7,7 @@
                 <h1 class="h2 pb-4">Categories</h1>
                 <ul class="list-unstyled templatemo-accordion">
                     <li class="pb-3" v-for="category in categorys" :key="category.idCategory">
-                        <a class="collapsed d-flex justify-content-between h3 text-decoration-none" href="#">
+                        <a class="collapsed d-flex justify-content-between h3 text-decoration-none" :href="'/shop-filter/' + category.idCategory">
                             {{ category.categoryName }}
                             <i class="fa fa-fw fa-chevron-circle-down mt-1"></i>
                         </a>
@@ -16,7 +16,7 @@
                             <li><a class="text-decoration-none" href="#">Women</a></li>
                         </ul>
                     </li>
-                    <li class="pb-3">
+                    <!-- <li class="pb-3">
                         <a class="collapsed d-flex justify-content-between h3 text-decoration-none" href="#">
                             Sale
                             <i class="pull-right fa fa-fw fa-chevron-circle-down mt-1"></i>
@@ -36,7 +36,7 @@
                             <li><a class="text-decoration-none" href="#">Sweather</a></li>
                             <li><a class="text-decoration-none" href="#">Sunglass</a></li>
                         </ul>
-                    </li>
+                    </li> -->
                 </ul>
             </div>
 
@@ -74,12 +74,12 @@
                                     <ul class="list-unstyled">
                                         <li><a class="btn btn-success text-white" href="/shop-single"><i class="far fa-heart"></i></a></li>
                                         <li><a class="btn btn-success text-white mt-2" href="/shop-single"><i class="far fa-eye"></i></a></li>
-                                        <li><a class="btn btn-success text-white mt-2" href="/shop-single"><i class="fas fa-cart-plus"></i></a></li>
+                                        <!-- <li><a class="btn btn-success text-white mt-2" href="/shop-single"><i class="fas fa-cart-plus"></i></a></li> -->
                                     </ul>
                                 </div>
                             </div>
                             <div class="card-body">
-                                <a href="/shop-single" class="h3 text-decoration-none"> {{ product.productName }} </a>
+                                <a :href="'/shop-single/' + product.idProduct" class="h3 text-decoration-none"> {{ product.productName }} </a>
                                 <ul class="w-100 list-unstyled d-flex justify-content-between mb-0">
                                     <li>M/L/X/XL</li>
                                     <li class="pt-2">
@@ -538,7 +538,13 @@ export default {
     async mounted() {
         this.categorys = await getData.fetchData("category");
         this.idCategory = this.$route.params.idCategory;
-        this.products = await getData.fetchData("productByIdCategory?filter=" + this.idCategory);
+        console.log(window.location.pathname);
+        if (window.location.pathname != '/shop') {
+            this.products = await getData.fetchData("product?filter=" + this.idCategory);
+        } else {
+            console.log("p");
+            this.products = await getData.fetchData("product");
+        }
         console.log("category", this.categorys)
         console.log("product", this.products)
     }

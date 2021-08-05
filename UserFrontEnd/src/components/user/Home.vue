@@ -96,7 +96,7 @@
             <div class="col-12 col-md-4 p-5 mt-3" v-for="category in data" :key="category.idCategory">
                 <a href="/shop-single"><img src="/src/assets/img/category_img_01.jpg" class="rounded-circle img-fluid border"></a>
                 <h5 class="text-center mt-3 mb-3"> {{ category.categoryName }} </h5>
-                <p class="text-center"><a :href="'/shop/' + category.idCategory" class="btn btn-success" @click="detail">Go Shop</a></p>
+                <p class="text-center"><a :href="'/shop-filter/' + category.idCategory" class="btn btn-success" @click="detail">Go Shop</a></p>
             </div>
             <!-- <div class="col-12 col-md-4 p-5 mt-3">
                 <a href="/shop-single"><img src="/src/assets/img/category_img_02.jpg" class="rounded-circle img-fluid border"></a>

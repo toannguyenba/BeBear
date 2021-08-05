@@ -17,7 +17,12 @@ const routes = [
         component: About
     },
     {
-        path: '/shop/:idCategory',
+        path: '/shop-filter/:idCategory',
+        name: 'ShopFilter',
+        component: Shop
+    },
+    {
+        path: '/shop',
         name: 'Shop',
         component: Shop
     },

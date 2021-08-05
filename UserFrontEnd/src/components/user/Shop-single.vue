@@ -153,12 +153,27 @@
                                             <li class="list-inline-item">Size :
                                                 <input type="hidden" name="product-size" id="product-size" value="S">
                                             </li>
-                                            <li class="list-inline-item"><span class="btn btn-success btn-size">S</span></li>
-                                            <li class="list-inline-item"><span class="btn btn-success btn-size">M</span></li>
+                                            <li class="list-inline-item" v-for="size in sizes" :key="size.idSize">
+                                                <span class="btn btn-success btn-size"> {{ size.sizeName }} </span>
+                                            </li>
+                                            <!-- <li class="list-inline-item"><span class="btn btn-success btn-size">M</span></li>
                                             <li class="list-inline-item"><span class="btn btn-success btn-size">L</span></li>
-                                            <li class="list-inline-item"><span class="btn btn-success btn-size">XL</span></li>
+                                            <li class="list-inline-item"><span class="btn btn-success btn-size">XL</span></li> -->
                                         </ul>
                                     </div>
+                                    <div class="col-auto">
+                                        <ul class="list-inline pb-3">
+                                            <li class="list-inline-item">Color :
+                                                <input type="hidden" name="product-size" id="product-size" value="S">
+                                            </li>
+                                            <li class="list-inline-item" v-for="color in colors" :key="color.idColor">
+                                                <span class="btn btn-success btn-size"> {{ color.colorName }} </span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    
+                                </div>
+                                <!-- <div class="row">
                                     <div class="col-auto">
                                         <ul class="list-inline pb-3">
                                             <li class="list-inline-item text-right">
@@ -170,7 +185,7 @@
                                             <li class="list-inline-item"><span class="btn btn-success" id="btn-plus">+</span></li>
                                         </ul>
                                     </div>
-                                </div>
+                                </div> -->
                                 <div class="row pb-3">
                                     <div class="col d-grid">
                                         <button type="submit" class="btn btn-success btn-lg" name="submit" value="buy">Buy</button>
@@ -186,7 +201,6 @@
                 </div>
             </div>
         </div>
-        {{ $route.params.id }}
     </section>
     <!-- Close Content -->
 
@@ -665,14 +679,25 @@
 </template>
 
 <script>
+import getData from "/src/modules/constant.js"
 export default {
-    computed: {
-        productDetail() {
-          return this.$store.state.productDetail;
+    data() {
+        return {
+            idProduct: null,
+            productDetails: [],
+            colors: [],
+            sizes: [],
         }
     },
-    mounted() {
-        // console.log(this.$route.params.id);
+    async mounted() {
+        this.idProduct = this.$route.params.idProduct;
+        // this.products = await getData.fetchData("product");
+        this.productDetails = await getData.fetchData("productDetail?filter=" + this.idProduct);
+        this.colors = await getData.fetchData("color?filter=" + this.idProduct);
+        this.sizes = await getData.fetchData("size?filter=" + this.idProduct);
+        console.log(this.productDetails);
+        console.log(this.colors);
+        console.log(this.sizes);
     }
 }
 </script>
