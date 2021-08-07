@@ -11,6 +11,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.BeBear.entities.Product;
 import com.BeBear.entities.ProductDetail;
 import com.BeBear.repositories.ProductDetailRepository;
 import com.BeBear.services.IProductDetailService;
@@ -48,6 +49,18 @@ public class ProductDetailService implements IProductDetailService {
 	public boolean deleteProductDetail(int id) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public List<ProductDetail> findAll() {
+		List<ProductDetail> productDetails = proDetailRepository.findAll();
+		return productDetails;
+	}
+
+	@Override
+	public List<ProductDetail> findProductDetailByIdProduct(Product product) {
+		List<ProductDetail> productDetails = proDetailRepository.findByIdProduct(product);
+		return productDetails;
 	}
 	
 }

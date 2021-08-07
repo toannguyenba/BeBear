@@ -93,12 +93,12 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-12 col-md-4 p-5 mt-3">
+            <div class="col-12 col-md-4 p-5 mt-3" v-for="category in data" :key="category.idCategory">
                 <a href="/shop-single"><img src="/src/assets/img/category_img_01.jpg" class="rounded-circle img-fluid border"></a>
-                <h5 class="text-center mt-3 mb-3">Watches</h5>
-                <p class="text-center"><a :href="'/shop-single/' + id" class="btn btn-success" @click="detail">Go Shop</a></p>
+                <h5 class="text-center mt-3 mb-3"> {{ category.categoryName }} </h5>
+                <p class="text-center"><a :href="'/shop-filter/' + category.idCategory" class="btn btn-success" @click="detail">Go Shop</a></p>
             </div>
-            <div class="col-12 col-md-4 p-5 mt-3">
+            <!-- <div class="col-12 col-md-4 p-5 mt-3">
                 <a href="/shop-single"><img src="/src/assets/img/category_img_02.jpg" class="rounded-circle img-fluid border"></a>
                 <h2 class="h5 text-center mt-3 mb-3">Shoes</h2>
                 <p class="text-center"><a href="/shop-single" class="btn btn-success">Go Shop</a></p>
@@ -107,7 +107,7 @@
                 <a href="/shop-single"><img src="/src/assets/img/category_img_03.jpg" class="rounded-circle img-fluid border"></a>
                 <h2 class="h5 text-center mt-3 mb-3">Accessories</h2>
                 <p class="text-center"><a href="/shop-single" class="btn btn-success">Go Shop</a></p>
-            </div>
+            </div> -->
         </div>
     </section>
     <!-- End Categories of The Month -->
@@ -203,8 +203,9 @@
 </template>
 
 <script>
-
+import getData from "/src/modules/constant.js";
 export default {
+
   data() {
     return{
         pD: {
@@ -212,7 +213,8 @@ export default {
             idColor: '4',
             idSize: '5'
         },
-        id: 7
+        id: 7,
+        data: []
     }
   },
   computed: {
@@ -224,6 +226,10 @@ export default {
       detail: function() {
           
       }
+  },
+  async mounted() {
+      this.data = await getData.fetchData("category");
+      console.log(this.data)
   }
 }
 </script>

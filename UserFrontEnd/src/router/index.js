@@ -17,6 +17,11 @@ const routes = [
         component: About
     },
     {
+        path: '/shop-filter/:idCategory',
+        name: 'ShopFilter',
+        component: Shop
+    },
+    {
         path: '/shop',
         name: 'Shop',
         component: Shop
@@ -27,7 +32,7 @@ const routes = [
         component: Contact
     },
     {
-        path: '/shop-single/:id',
+        path: '/shop-single/:idProduct',
         name: 'ShopSingle',
         component: ShopSingle
     }

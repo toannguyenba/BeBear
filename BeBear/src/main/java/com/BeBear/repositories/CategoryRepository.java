@@ -7,5 +7,5 @@ import com.BeBear.entities.Category;
 
 @Repository
 public interface CategoryRepository extends JpaRepository<Category, Integer> {
-
+	
 }
