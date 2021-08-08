@@ -107,6 +107,7 @@
 																<th>Giá</th>
 																<th>Giá sale</th>
 																<th>Trạng thái</th>
+																<th>Hình ảnh</th>
 																<th>Công cụ</th>
 															</tr>
 														</thead>
@@ -119,6 +120,9 @@
 																<td>{{ pro.price }}</td>
 																<td>{{ pro.salePrice }}</td>
 																<td>{{ status[index] }}</td>
+																<td>
+																	<img style="width: 30px; height: 30px" alt="" src="C:\\upload\\product-photos\\4\\quan_kaki.jpg" v-if="pro.productPhotos.length > 0">
+																</td>
 																<td><a data-toggle="modal"
 																	data-target=".bd-example-modal-lg" class="icon-tool"
 																	@click="edit(index, 'Chỉnh sửa chi tiết sản phẩm')"><i
@@ -176,7 +180,7 @@
 																				<input type="text" class="form-control"
 																					name="price" v-model="p.price"> <input
 																					type="hidden" v-if="link == 'editProductDetail'"
-																					name="productDetail.idProductDetail"
+																					name="idProductDetail"
 																					v-model="p.idProductDetail">
 																			</div>
 																			<div class="col-sm-6">
@@ -215,7 +219,7 @@
 																			<div class="col-sm-6">
 																				<h4>Giá sale</h4>
 																				<input type="text" class="form-control"
-																					name="salePrice" v-model="salePrice">
+																					name="salePrice" v-model="p.salePrice">
 																			</div>
 																			<div class="col-sm-6">
 																				<h4>Trạng thái</h4>

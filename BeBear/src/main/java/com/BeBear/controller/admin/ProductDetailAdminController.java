@@ -107,9 +107,20 @@ public class ProductDetailAdminController {
 	}
 	
 	@PostMapping("/admin/editProductDetail")
-	public String editProductDetail (@ModelAttribute("productDetail") ProductDetail productDetail, RedirectAttributes redirectAtt) {
+	public String editProductDetail (@ModelAttribute("productDetail") ProductDetail productDetail, @RequestParam("file") MultipartFile[] productPhotos, RedirectAttributes redirectAtt) {
 		try {
-			boolean result = proDetailService.saveProductDetail(productDetail);
+			List<Productphoto> proPhotos = new ArrayList<Productphoto>();
+			// Save photos
+			for (MultipartFile productPhoto : productPhotos) {
+				String filename = StringUtils.cleanPath(productPhoto.getOriginalFilename());
+				String uploadDir = uploadPath + "\\" + productDetail.getIdProduct().getIdProduct();
+				FileUploadUtil.saveFile(uploadDir, filename, productPhoto);
+				Productphoto proPhoto = new Productphoto(productDetail, uploadDir + "\\" + filename);
+				proPhotos.add(proPhoto);
+			}
+			
+			productDetail.setProductPhotos(proPhotos);
+			boolean result = proDetailService.updateProductDetail(productDetail);
 			if (result) {
 				redirectAtt.addAttribute("message", "Chỉnh sửa thành công");			
 			} else {

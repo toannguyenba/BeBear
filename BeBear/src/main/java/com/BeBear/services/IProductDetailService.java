@@ -17,6 +17,8 @@ import com.BeBear.entities.ProductDetail;
 public interface IProductDetailService {
 	public boolean saveProductDetail(ProductDetail productDetail);
 	
+	public boolean updateProductDetail(ProductDetail productDetail);
+	
 	public Page<ProductDetail> getAllProductDetail(int currentPage);
 	
 	public boolean deleteProductDetail(int id);

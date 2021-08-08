@@ -69,7 +69,7 @@
                     <div class="col-md-4" v-for="product in products" :key="product.idProduct">
                         <div class="card mb-4 product-wap rounded-0">
                             <div class="card rounded-0">
-                                <img class="card-img rounded-0 img-fluid" src="/src/assets/img/shop_01.jpg">
+                                <img class="card-img rounded-0 img-fluid" src="/quan_kaki.jpg">
                                 <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
                                     <ul class="list-unstyled">
                                         <li><a class="btn btn-success text-white" href="/shop-single"><i class="far fa-heart"></i></a></li>
@@ -538,11 +538,9 @@ export default {
     async mounted() {
         this.categorys = await getData.fetchData("category");
         this.idCategory = this.$route.params.idCategory;
-        console.log(window.location.pathname);
         if (window.location.pathname != '/shop') {
             this.products = await getData.fetchData("product?filter=" + this.idCategory);
         } else {
-            console.log("p");
             this.products = await getData.fetchData("product");
         }
         console.log("category", this.categorys)

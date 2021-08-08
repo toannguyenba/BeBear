@@ -62,5 +62,27 @@ public class ProductDetailService implements IProductDetailService {
 		List<ProductDetail> productDetails = proDetailRepository.findByIdProduct(product);
 		return productDetails;
 	}
+
+	@Override
+	public boolean updateProductDetail(ProductDetail productDetail) {
+		boolean check = true;
+		try {
+			List<ProductDetail> pds = proDetailRepository.findByIdProductAndIdColorAndIdSize(productDetail.getIdProduct(), productDetail.getIdColor(), productDetail.getIdSize());
+			ProductDetail pd = proDetailRepository.getById(productDetail.getIdProductDetail());
+			boolean checkIdProduct = pd.getIdProduct() != productDetail.getIdProduct();
+			boolean checkIdColor = pd.getIdColor() != productDetail.getIdColor();
+			boolean checkIdSize = pd.getIdSize() != productDetail.getIdSize();
+			// Nếu sửa id trùng với bản ghi khác
+			if ((checkIdProduct || checkIdColor || checkIdSize) && !pds.isEmpty()) {
+				check = false;
+			} else {
+				ProductDetail result = proDetailRepository.save(productDetail);
+				check = result != null;
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return check;
+	}
 	
 }
