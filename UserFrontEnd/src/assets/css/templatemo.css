@@ -171,6 +171,31 @@ body, ul, li, p, a, label, input, div {
   border-bottom: #da5c45 solid 2px;
 }
 
+.money {
+  font-family: 'Quicksand',sans-serif;
+  font-weight: 550 !important;
+}
+
+.money-icon {
+  font-size: 16px;
+  font-weight: bold;
+  text-decoration: underline;
+  margin-bottom: 10px !important;
+}
+
+.money-line {
+  text-decoration: line-through;
+  font-size: 16px;
+  font-weight: normal!important;
+  margin-left: 25px;
+}
+
+.money-line-icon {
+  font-size: 14px;
+  font-weight: bold;
+  text-decoration: underline line-through;
+}
+
 @media (min-width: 576px) {
   .tempaltemo-carousel .h1 { font-size: 1em !important;}
 }

@@ -104,8 +104,8 @@
                 <div class="col-lg-7 mt-5">
                     <div class="card">
                         <div class="card-body">
-                            <h1 class="h2">Active Wear</h1>
-                            <p class="h3 py-2">$25.00</p>
+                            <h1 class="h2"> {{ product.productName }} </h1>
+                            <p class="h3 py-2 money"> {{ product.price.minSalePrice }}<span class="money-icon">đ</span> - {{ product.price.maxSalePrice }}<span class="money-icon">đ</span><span class="money-line"> {{ product.price.maxPrice }}</span><span class="money-line-icon">đ</span></p>
                             <p class="py-2">
                                 <i class="fa fa-star text-warning"></i>
                                 <i class="fa fa-star text-warning"></i>
@@ -119,22 +119,24 @@
                                     <h6>Brand:</h6>
                                 </li>
                                 <li class="list-inline-item">
-                                    <p class="text-muted"><strong>Easy Wear</strong></p>
+                                    <p class="text-muted">
+                                        <img src="/src/assets/img/BeBear.png" style="height:50px; width:80px; overflow: hidden"/>
+                                    </p>
                                 </li>
                             </ul>
 
                             <h6>Description:</h6>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse. Donec condimentum elementum convallis. Nunc sed orci a diam ultrices aliquet interdum quis nulla.</p>
-                            <ul class="list-inline">
+                            <p>{{ product.description }}</p>
+                            <!-- <ul class="list-inline">
                                 <li class="list-inline-item">
                                     <h6>Avaliable Color :</h6>
                                 </li>
                                 <li class="list-inline-item">
                                     <p class="text-muted"><strong>White / Black</strong></p>
                                 </li>
-                            </ul>
+                            </ul> -->
 
-                            <h6>Specification:</h6>
+                            <!-- <h6>Specification:</h6>
                             <ul class="list-unstyled pb-3">
                                 <li>Lorem ipsum dolor sit</li>
                                 <li>Amet, consectetur</li>
@@ -143,11 +145,11 @@
                                 <li>Ut enim ad minim</li>
                                 <li>Dolore magna aliqua</li>
                                 <li>Excepteur sint</li>
-                            </ul>
+                            </ul> -->
 
                             <form action="" method="GET">
                                 <input type="hidden" name="product-title" value="Activewear">
-                                <div class="row">
+                                <!-- <div class="row"> -->
                                     <div class="col-auto">
                                         <ul class="list-inline pb-3">
                                             <li class="list-inline-item">Size :
@@ -172,7 +174,7 @@
                                         </ul>
                                     </div>
                                     
-                                </div>
+                                <!-- </div> -->
                                 <!-- <div class="row">
                                     <div class="col-auto">
                                         <ul class="list-inline pb-3">
@@ -208,7 +210,7 @@
     <section class="py-5">
         <div class="container">
             <div class="row text-left p-2 pb-3">
-                <h4>Related Products</h4>
+                <h4>Sản phẩm tương tự</h4>
             </div>
 
             <!--Start Carousel Wrapper-->
@@ -726,15 +728,21 @@ export default {
             productDetails: [],
             colors: [],
             sizes: [],
+            product: {
+                price: {minSalePrice: 0, maxSalePrice: 0, maxPrice: 0}
+            }
         }
     },
     async mounted() {
         this.idProduct = this.$route.params.idProduct;
         // this.products = await getData.fetchData("product");
         this.productDetails = await getData.fetchData("productDetail?filter=" + this.idProduct);
+        this.product = await getData.fetchData("productByIdProduct?id=" + this.idProduct);
+        this.product.price = getData.getPrice(this.product);
         this.colors = await getData.fetchData("color?filter=" + this.idProduct);
         this.sizes = await getData.fetchData("size?filter=" + this.idProduct);
         console.log(this.productDetails);
+        console.log(this.product);
         console.log(this.colors);
         console.log(this.sizes);
     }
