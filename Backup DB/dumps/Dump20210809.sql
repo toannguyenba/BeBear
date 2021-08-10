@@ -16,13 +16,13 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `account`
+-- Table structure for table `Account`
 --
 
-DROP TABLE IF EXISTS `account`;
+DROP TABLE IF EXISTS `Account`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `account` (
+CREATE TABLE `Account` (
   `IdAccount` int(11) NOT NULL AUTO_INCREMENT,
   `Email` varchar(20) NOT NULL,
   `Password` varchar(20) NOT NULL,
@@ -46,20 +46,20 @@ CREATE TABLE `account` (
 -- Dumping data for table `account`
 --
 
-LOCK TABLES `account` WRITE;
-/*!40000 ALTER TABLE `account` DISABLE KEYS */;
-INSERT INTO `account` VALUES (1,'tung@gmail.com','123','Tùng Trần','Tùng','Trần Danh','Trần Danh Tùng',0,'1998-05-06 00:00:00','Hà Nội','0988888888',1,1,'2021-05-06 00:00:00','Admin'),(2,'Admin1@gmail.com','123','Toàn Trần','Toàn','Trần Danh','Trần Danh Toàn',0,'1998-05-06 00:00:00','Hà Nội','0988888888',1,1,'2021-05-06 00:00:00','Admin'),(3,'Admin2@gmail.com','123','Vinh Trần','Vinh','Trần Công','Trần Công Vinh',0,'1998-05-06 00:00:00','Hà Nội','0988888888',1,1,'2021-05-06 00:00:00','Admin'),(4,'Admin3@gmail.com','123','Hoàn Nguyễn','Hoàn','Nguyễn Công','Nguyễn Công Hoàn',0,'1998-05-06 00:00:00','Hà Nội','0988888888',1,1,'2021-05-06 00:00:00','Admin'),(5,'Admin4@gmail.com','123','Lê Văn','Sơn','Lê Văn','Lê Văn Sơn',0,'1998-05-06 00:00:00','Hà Nội','0988888888',1,1,'2021-05-06 00:00:00','Admin');
-/*!40000 ALTER TABLE `account` ENABLE KEYS */;
+LOCK TABLES `Account` WRITE;
+/*!40000 ALTER TABLE `Account` DISABLE KEYS */;
+INSERT INTO `Account` VALUES (1,'tung@gmail.com','123','Tùng Trần','Tùng','Trần Danh','Trần Danh Tùng',0,'1998-05-06 00:00:00','Hà Nội','0988888888',1,1,'2021-05-06 00:00:00','Admin'),(2,'Admin1@gmail.com','123','Toàn Trần','Toàn','Trần Danh','Trần Danh Toàn',0,'1998-05-06 00:00:00','Hà Nội','0988888888',1,1,'2021-05-06 00:00:00','Admin'),(3,'Admin2@gmail.com','123','Vinh Trần','Vinh','Trần Công','Trần Công Vinh',0,'1998-05-06 00:00:00','Hà Nội','0988888888',1,1,'2021-05-06 00:00:00','Admin'),(4,'Admin3@gmail.com','123','Hoàn Nguyễn','Hoàn','Nguyễn Công','Nguyễn Công Hoàn',0,'1998-05-06 00:00:00','Hà Nội','0988888888',1,1,'2021-05-06 00:00:00','Admin'),(5,'Admin4@gmail.com','123','Lê Văn','Sơn','Lê Văn','Lê Văn Sơn',0,'1998-05-06 00:00:00','Hà Nội','0988888888',1,1,'2021-05-06 00:00:00','Admin');
+/*!40000 ALTER TABLE `Account` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `category`
+-- Table structure for table `Category`
 --
 
-DROP TABLE IF EXISTS `category`;
+DROP TABLE IF EXISTS `Category`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `category` (
+CREATE TABLE `Category` (
   `IdCategory` int(11) NOT NULL AUTO_INCREMENT,
   `CategoryName` varchar(45) NOT NULL,
   `Description` varchar(45) NOT NULL,
@@ -71,23 +71,23 @@ CREATE TABLE `category` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `category`
+-- Dumping data for table `Category`
 --
 
-LOCK TABLES `category` WRITE;
-/*!40000 ALTER TABLE `category` DISABLE KEYS */;
-INSERT INTO `category` VALUES (1,'Áo','Áo phông trơn',0,'2021-07-28 17:55:02','SystemAdmin'),(2,'Đồ Nam','Quần âu',0,'2021-07-28 17:42:55','SystemAdmin'),(5,'Quần','Quần',0,'2021-07-28 12:51:15','SystemAdmin');
-/*!40000 ALTER TABLE `category` ENABLE KEYS */;
+LOCK TABLES `Category` WRITE;
+/*!40000 ALTER TABLE `Category` DISABLE KEYS */;
+INSERT INTO `Category` VALUES (1,'Áo','Áo phông trơn',0,'2021-07-28 17:55:02','SystemAdmin'),(2,'Đồ Nam','Quần âu',0,'2021-07-28 17:42:55','SystemAdmin'),(5,'Quần','Quần',0,'2021-07-28 12:51:15','SystemAdmin');
+/*!40000 ALTER TABLE `Category` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `color`
+-- Table structure for table `Color`
 --
 
-DROP TABLE IF EXISTS `color`;
+DROP TABLE IF EXISTS `Color`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `color` (
+CREATE TABLE `Color` (
   `IdColor` int(11) NOT NULL AUTO_INCREMENT,
   `ColorName` varchar(45) COLLATE utf8_vietnamese_ci NOT NULL,
   `Description` varchar(45) COLLATE utf8_vietnamese_ci NOT NULL,
@@ -99,23 +99,23 @@ CREATE TABLE `color` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `color`
+-- Dumping data for table `Color`
 --
 
-LOCK TABLES `color` WRITE;
-/*!40000 ALTER TABLE `color` DISABLE KEYS */;
-INSERT INTO `color` VALUES (5,'Color1','Color1',0,NULL,NULL),(15,'Color2','Color2',0,NULL,NULL),(25,'Color3','Color3',0,'2021-07-18 15:37:26','SystemAdmin'),(35,'Color4','Color4',0,NULL,NULL),(85,'5','5',0,NULL,NULL),(95,'gfsdafd','fdsafds',0,NULL,NULL),(105,'fdsafdsa','àdsafdsa',0,NULL,NULL),(115,'gdfsgfdsf','fdsafdsa',0,'2021-07-14 23:52:46',NULL),(125,'fds','dsafds',0,'2021-07-14 23:55:49','SystemAdmin'),(1005,'Màu hường','fdsfd',0,'2021-07-28 18:14:57','SystemAdmin'),(1015,'Màu Be','Màu Be',0,'2021-07-16 09:22:15','SystemAdmin'),(1025,'Màu đen','Màu đen',0,'2021-07-16 09:37:14','SystemAdmin'),(1035,'Màu trắng','Màu trắng',0,'2021-07-16 09:37:30','SystemAdmin'),(1045,'Màu tôm','Màu tôm',0,'2021-07-16 09:37:41','SystemAdmin'),(1055,'test','test',0,'2021-07-18 09:44:02','SystemAdmin'),(1065,'Màu xanh lam','Màu xanh lam',0,'2021-07-18 15:07:40','SystemAdmin'),(1115,'Màu trắng','Màu trắng',0,'2021-07-18 16:35:41','SystemAdmin');
+LOCK TABLES `Color` WRITE;
+/*!40000 ALTER TABLE `Color` DISABLE KEYS */;
+INSERT INTO `Color` VALUES (5,'Color1','Color1',0,NULL,NULL),(15,'Color2','Color2',0,NULL,NULL),(25,'Color3','Color3',0,'2021-07-18 15:37:26','SystemAdmin'),(35,'Color4','Color4',0,NULL,NULL),(85,'5','5',0,NULL,NULL),(95,'gfsdafd','fdsafds',0,NULL,NULL),(105,'fdsafdsa','àdsafdsa',0,NULL,NULL),(115,'gdfsgfdsf','fdsafdsa',0,'2021-07-14 23:52:46',NULL),(125,'fds','dsafds',0,'2021-07-14 23:55:49','SystemAdmin'),(1005,'Màu hường','fdsfd',0,'2021-07-28 18:14:57','SystemAdmin'),(1015,'Màu Be','Màu Be',0,'2021-07-16 09:22:15','SystemAdmin'),(1025,'Màu đen','Màu đen',0,'2021-07-16 09:37:14','SystemAdmin'),(1035,'Màu trắng','Màu trắng',0,'2021-07-16 09:37:30','SystemAdmin'),(1045,'Màu tôm','Màu tôm',0,'2021-07-16 09:37:41','SystemAdmin'),(1055,'test','test',0,'2021-07-18 09:44:02','SystemAdmin'),(1065,'Màu xanh lam','Màu xanh lam',0,'2021-07-18 15:07:40','SystemAdmin'),(1115,'Màu trắng','Màu trắng',0,'2021-07-18 16:35:41','SystemAdmin');
 /*!40000 ALTER TABLE `color` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `evaluation`
+-- Table structure for table `Evaluation`
 --
 
-DROP TABLE IF EXISTS `evaluation`;
+DROP TABLE IF EXISTS `Evaluation`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `evaluation` (
+CREATE TABLE `Evaluation` (
   `IdEvaluation` int(11) NOT NULL AUTO_INCREMENT,
   `IdAccount` int(11) NOT NULL,
   `IdProduct` int(11) NOT NULL,
@@ -127,22 +127,22 @@ CREATE TABLE `evaluation` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `evaluation`
+-- Dumping data for table `Evaluation`
 --
 
-LOCK TABLES `evaluation` WRITE;
-/*!40000 ALTER TABLE `evaluation` DISABLE KEYS */;
-/*!40000 ALTER TABLE `evaluation` ENABLE KEYS */;
+LOCK TABLES `Evaluation` WRITE;
+/*!40000 ALTER TABLE `Evaluation` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Evaluation` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `orderdetail`
+-- Table structure for table `Orderdetail`
 --
 
-DROP TABLE IF EXISTS `orderdetail`;
+DROP TABLE IF EXISTS `Orderdetail`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `orderdetail` (
+CREATE TABLE `Orderdetail` (
   `IdOrderDetail` int(11) NOT NULL AUTO_INCREMENT,
   `IdProductDetail` int(11) NOT NULL,
   `Quantity` int(11) NOT NULL,
@@ -154,12 +154,12 @@ CREATE TABLE `orderdetail` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `orderdetail`
+-- Dumping data for table `Orderdetail`
 --
 
-LOCK TABLES `orderdetail` WRITE;
-/*!40000 ALTER TABLE `orderdetail` DISABLE KEYS */;
-/*!40000 ALTER TABLE `orderdetail` ENABLE KEYS */;
+LOCK TABLES `Orderdetail` WRITE;
+/*!40000 ALTER TABLE `Orderdetail` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Orderdetail` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
