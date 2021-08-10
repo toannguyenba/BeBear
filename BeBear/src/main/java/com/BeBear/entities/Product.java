@@ -24,7 +24,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
  */
 @Entity
 //@NamedQuery(name="Product.findAll", query="SELECT p FROM Product p")
-@Table(name = "product")
+@Table(name = "Product")
 public class Product implements Serializable {
 	private static final long serialVersionUID = 1L;
 
