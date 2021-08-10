@@ -60,6 +60,17 @@ public class HomeController {
 		return products;
 	}
 	
+	@GetMapping("/productByIdProduct")
+	public Product getProductByIdProduct(@RequestParam(value = "id", required = false) int id) {
+		Product product = new Product();
+		try {
+			product = productService.findByIdProduct(id);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return product;
+	}
+	
 	@GetMapping("/category")
 	public List<Category> getAllCategory() {
 		List<Category> categorys = new ArrayList<Category>(); 

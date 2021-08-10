@@ -91,10 +91,10 @@ export default {
     data() {
         return {
             menuTop: [
-                {name: 'Home', isActive: false, link: '/'},
-                {name: 'About', isActive: false, link: '/about'},
-                {name: 'Shop', isActive: false, link: '/shop'},
-                {name: 'Contact', isActive: false, link: '/contact'},
+                {name: 'Trang chủ', isActive: false, link: '/'},
+                {name: 'Giới thiệu', isActive: false, link: '/about'},
+                {name: 'Sản phẩm', isActive: false, link: '/shop'},
+                {name: 'Liên hệ', isActive: false, link: '/contact'},
                 
             ]
         }

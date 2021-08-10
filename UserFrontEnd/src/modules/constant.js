@@ -10,6 +10,30 @@ const getData = {
         })
 
         return results;
+    },
+
+    getPrice (product) {
+        let minSalePrice = product.productdetail[0].salePrice;
+        let maxSalePrice = product.productdetail[0].price;
+        let maxPrice = product.productdetail[0].salePrice;
+        
+        product.productdetail.forEach(element => {
+            if (minSalePrice > element.salePrice) {
+                minSalePrice = element.salePrice
+            }
+
+            if (maxSalePrice < element.salePrice) {
+                maxSalePrice = element.salePrice
+            }
+
+            if (maxPrice < element.price) {
+                maxPrice = element.price
+            }
+        });
+
+        var price = {minSalePrice: minSalePrice, maxSalePrice: maxSalePrice, maxPrice: maxPrice}
+
+        return price;
     }
 }
 
