@@ -1,3 +1,0 @@
-username: toantung11
-email: ngbatoan22@gmail.com
-psw: toantung11@
