@@ -121,7 +121,7 @@
 																<td>{{ pro.salePrice }}</td>
 																<td>{{ status[index] }}</td>
 																<td>
-																	<img style="width: 30px; height: 30px" alt="" src="C:\\upload\\product-photos\\4\\quan_kaki.jpg" v-if="pro.productPhotos.length > 0">
+																	<img style="width: 30px; height: 30px" alt="" :src="pro.productPhotos[0].url" v-if="pro.productPhotos.length > 0">
 																</td>
 																<td><a data-toggle="modal"
 																	data-target=".bd-example-modal-lg" class="icon-tool"

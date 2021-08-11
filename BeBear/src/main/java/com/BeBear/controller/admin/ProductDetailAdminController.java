@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.BeBear.config.AmazonClient;
 import com.BeBear.entities.Color;
 import com.BeBear.entities.Product;
 import com.BeBear.entities.ProductDetail;
@@ -36,6 +37,14 @@ import com.BeBear.utils.PageUtil;
  */
 @Controller
 public class ProductDetailAdminController {
+	
+	private AmazonClient amazonClient;
+	
+	@Autowired
+	ProductDetailAdminController(AmazonClient amazonClient) {
+		this.amazonClient = amazonClient;
+	}
+	
 	@Autowired
 	public ProductDetailService proDetailService;
 	
@@ -80,17 +89,22 @@ public class ProductDetailAdminController {
 	}
 	
 	@PostMapping("/admin/addProductDetail")
-	public String addProductDetail (@ModelAttribute("productDetail") ProductDetail productDetail, @RequestParam("file") MultipartFile[] productPhotos, RedirectAttributes redirectAtt) {
+	public String addProductDetail (@ModelAttribute("productDetail") ProductDetail productDetail, @RequestParam("file") MultipartFile file, RedirectAttributes redirectAtt) {
 		try {
 			List<Productphoto> proPhotos = new ArrayList<Productphoto>();
 			// Save photos
-			for (MultipartFile productPhoto : productPhotos) {
-				String filename = StringUtils.cleanPath(productPhoto.getOriginalFilename());
-				String uploadDir = uploadPath + "\\" + productDetail.getIdProduct().getIdProduct();
-				FileUploadUtil.saveFile(uploadDir, filename, productPhoto);
-				Productphoto proPhoto = new Productphoto(productDetail, uploadDir + "\\" + filename);
-				proPhotos.add(proPhoto);
-			}
+//			for (MultipartFile productPhoto : productPhotos) {
+//				String filename = StringUtils.cleanPath(productPhoto.getOriginalFilename());
+//				String uploadDir = uploadPath + "\\" + productDetail.getIdProduct().getIdProduct();
+//				FileUploadUtil.saveFile(uploadDir, filename, productPhoto);
+//				Productphoto proPhoto = new Productphoto(productDetail, uploadDir + "\\" + filename);
+//				proPhotos.add(proPhoto);
+//			}
+			String url = this.amazonClient.uploadFile(file);
+			
+			Productphoto proPhoto = new Productphoto(productDetail, url);
+			
+			proPhotos.add(proPhoto);
 			
 			productDetail.setProductPhotos(proPhotos);
 			
