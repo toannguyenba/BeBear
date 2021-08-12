@@ -27,4 +27,6 @@ public interface IProductDetailService {
 	
 	public List<ProductDetail> findProductDetailByIdProduct(Product product);
 	
+	public ProductDetail getByIdProductDetail(int id);
+	
 }

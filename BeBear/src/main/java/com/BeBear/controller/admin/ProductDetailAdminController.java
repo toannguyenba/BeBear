@@ -26,6 +26,7 @@ import com.BeBear.entities.Productphoto;
 import com.BeBear.entities.Size;
 import com.BeBear.services.impl.ColorService;
 import com.BeBear.services.impl.ProductDetailService;
+import com.BeBear.services.impl.ProductPhotoService;
 import com.BeBear.services.impl.ProductService;
 import com.BeBear.services.impl.SizeService;
 import com.BeBear.utils.FileUploadUtil;
@@ -57,11 +58,12 @@ public class ProductDetailAdminController {
 	@Autowired
 	private ProductService productService;
 	
+	@Autowired
+	private ProductPhotoService productPhotoService;
+	
 	private List<Product> products;
 	private List<Color> colors;
 	private List<Size> sizes;
-	
-	private final String uploadPath = "C:\\upload\\product-photos";
 	
 	@GetMapping("/admin/productDetail")
 	public String getAllProductDetail (@RequestParam(name = "currentPage", defaultValue = "1")int currentPage, Model model) {
@@ -91,22 +93,13 @@ public class ProductDetailAdminController {
 	@PostMapping("/admin/addProductDetail")
 	public String addProductDetail (@ModelAttribute("productDetail") ProductDetail productDetail, @RequestParam("file") MultipartFile file, RedirectAttributes redirectAtt) {
 		try {
-			List<Productphoto> proPhotos = new ArrayList<Productphoto>();
-			// Save photos
-//			for (MultipartFile productPhoto : productPhotos) {
-//				String filename = StringUtils.cleanPath(productPhoto.getOriginalFilename());
-//				String uploadDir = uploadPath + "\\" + productDetail.getIdProduct().getIdProduct();
-//				FileUploadUtil.saveFile(uploadDir, filename, productPhoto);
-//				Productphoto proPhoto = new Productphoto(productDetail, uploadDir + "\\" + filename);
-//				proPhotos.add(proPhoto);
-//			}
-			String url = this.amazonClient.uploadFile(file);
-			
-			Productphoto proPhoto = new Productphoto(productDetail, url);
-			
-			proPhotos.add(proPhoto);
-			
-			productDetail.setProductPhotos(proPhotos);
+			if (file.getOriginalFilename() != "") {
+				List<Productphoto> proPhotos = new ArrayList<Productphoto>();
+				String url = this.amazonClient.uploadFile(file);			
+				Productphoto proPhoto = new Productphoto(productDetail, url);			
+				proPhotos.add(proPhoto);			
+				productDetail.setProductPhotos(proPhotos);
+			} 
 			
 			boolean result = proDetailService.saveProductDetail(productDetail);
 			if (result) {
@@ -121,19 +114,22 @@ public class ProductDetailAdminController {
 	}
 	
 	@PostMapping("/admin/editProductDetail")
-	public String editProductDetail (@ModelAttribute("productDetail") ProductDetail productDetail, @RequestParam("file") MultipartFile[] productPhotos, RedirectAttributes redirectAtt) {
+	public String editProductDetail (@ModelAttribute("productDetail") ProductDetail productDetail, @RequestParam("file") MultipartFile file, RedirectAttributes redirectAtt) {
 		try {
-			List<Productphoto> proPhotos = new ArrayList<Productphoto>();
-			// Save photos
-			for (MultipartFile productPhoto : productPhotos) {
-				String filename = StringUtils.cleanPath(productPhoto.getOriginalFilename());
-				String uploadDir = uploadPath + "\\" + productDetail.getIdProduct().getIdProduct();
-				FileUploadUtil.saveFile(uploadDir, filename, productPhoto);
-				Productphoto proPhoto = new Productphoto(productDetail, uploadDir + "\\" + filename);
-				proPhotos.add(proPhoto);
-			}
+			if (file.getOriginalFilename() != "") {
+				ProductDetail productDetailFromDB = proDetailService.getByIdProductDetail(productDetail.getIdProductDetail());
+				Productphoto proPhotoFromDB = productDetailFromDB.getProductPhotos().get(0);
+				//Delete file from s3
+				this.amazonClient.deleteFile(proPhotoFromDB.getUrl());
+				productPhotoService.deleteProductPhoto(proPhotoFromDB.getIdPhoto());
+				
+				List<Productphoto> proPhotos = new ArrayList<Productphoto>();
+				String url = this.amazonClient.uploadFile(file);			
+				Productphoto proPhoto = new Productphoto(productDetail, url);			
+				proPhotos.add(proPhoto);			
+				productDetail.setProductPhotos(proPhotos);
+			} 
 			
-			productDetail.setProductPhotos(proPhotos);
 			boolean result = proDetailService.updateProductDetail(productDetail);
 			if (result) {
 				redirectAtt.addAttribute("message", "Chỉnh sửa thành công");			

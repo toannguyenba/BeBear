@@ -6,6 +6,7 @@ package com.BeBear.config;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.annotation.PostConstruct;
@@ -16,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.services.clouddirectory.model.DeleteObjectRequest;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
@@ -34,9 +36,9 @@ public class AmazonClient {
     
     private String bucketName = "bucketbebear";
     
-    private String accessKey = "AKIAZ5WTNU3HOSBXJS6T";
+    private String accessKey = "AKIAZ5WTNU3HH452ODH4";
     
-    private String secretKey = "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";
+    private String secretKey = "PiRgjl3GbFlWughk1opnh7AtCzKArHWix1QuJWAx";
     
     @PostConstruct
     private void initializeAmazon() {
@@ -57,23 +59,34 @@ public class AmazonClient {
     }
     
     private void uploadFileTos3bucket(String fileName, File file) {
-        s3client.putObject(new PutObjectRequest(bucketName, fileName, file));
-//                .withCannedAcl(CannedAccessControlList.PublicRead));
+        s3client.putObject(new PutObjectRequest(bucketName, fileName, file)
+                .withCannedAcl(CannedAccessControlList.PublicRead));
     }
     
     public String uploadFile(MultipartFile multipartFile) {
-
+    	Date date = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String fileUrl = "";
         try {
             File file = convertMultiPartToFile(multipartFile);
             String fileName = generateFileName(multipartFile);
-            fileUrl = endpointUrl + "/" + bucketName + "/" + fileName;
-            uploadFileTos3bucket(fileName, file);
+            String strDate = sdf.format(date);
+            fileUrl = endpointUrl + "/" + strDate + "/" + fileName;
+            uploadFileTos3bucket(strDate + "/" + fileName, file);
             file.delete();
         } catch (Exception e) {
            System.out.println(e.getMessage());
         }
         return fileUrl;
+    }
+    
+    public void deleteFile(String url) {
+    	String [] array = url.split("/");
+    	try {
+    		s3client.deleteObject(bucketName, array[3] + "/" + array[4]);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
     }
 
 }

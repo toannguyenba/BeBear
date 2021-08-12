@@ -84,5 +84,11 @@ public class ProductDetailService implements IProductDetailService {
 		}
 		return check;
 	}
+
+	@Override
+	public ProductDetail getByIdProductDetail(int id) {
+		ProductDetail pd = proDetailRepository.getById(id);
+		return pd;
+	}
 	
 }
