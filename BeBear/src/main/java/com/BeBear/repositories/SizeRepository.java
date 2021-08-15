@@ -16,9 +16,9 @@ import com.BeBear.entities.Size;
  */
 public interface SizeRepository extends JpaRepository<Size, Integer>  {
 	
-	@Query(value = "select distinct s.* from size s \r\n" + 
-			"inner join productDetail pd on s.idSize = pd.idSize\r\n" + 
-			"inner join product p on pd.idProduct = p.idProduct\r\n" + 
+	@Query(value = "select distinct s.* from Size s \r\n" + 
+			"inner join ProductDetail pd on s.idSize = pd.idSize\r\n" + 
+			"inner join Product p on pd.idProduct = p.idProduct\r\n" + 
 			"where p.idProduct = ?1", nativeQuery = true)
 	public List<Size> findByIdProduct(int idProduct);
 }

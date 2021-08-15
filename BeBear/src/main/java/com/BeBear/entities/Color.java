@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -20,7 +21,8 @@ import org.hibernate.annotations.UpdateTimestamp;
  * 
  */
 @Entity
-@NamedQuery(name="Color.findAll", query="SELECT c FROM Color c")
+//@NamedQuery(name="Color.findAll", query="SELECT c FROM Color c")
+@Table(name = "Color")
 public class Color implements Serializable {
 	private static final long serialVersionUID = 1L;
 

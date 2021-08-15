@@ -117,11 +117,11 @@ public class ProductDetailAdminController {
 	public String editProductDetail (@ModelAttribute("productDetail") ProductDetail productDetail, @RequestParam("file") MultipartFile file, RedirectAttributes redirectAtt) {
 		try {
 			if (file.getOriginalFilename() != "") {
-				ProductDetail productDetailFromDB = proDetailService.getByIdProductDetail(productDetail.getIdProductDetail());
-				Productphoto proPhotoFromDB = productDetailFromDB.getProductPhotos().get(0);
-				//Delete file from s3
-				this.amazonClient.deleteFile(proPhotoFromDB.getUrl());
-				productPhotoService.deleteProductPhoto(proPhotoFromDB.getIdPhoto());
+//				ProductDetail productDetailFromDB = proDetailService.getByIdProductDetail(productDetail.getIdProductDetail());
+//				Productphoto proPhotoFromDB = productDetailFromDB.getProductPhotos().get(0);
+//				//Delete file from s3
+//				this.amazonClient.deleteFile(proPhotoFromDB.getUrl());
+//				productPhotoService.deleteProductPhoto(proPhotoFromDB.getIdPhoto());
 				
 				List<Productphoto> proPhotos = new ArrayList<Productphoto>();
 				String url = this.amazonClient.uploadFile(file);			

@@ -196,6 +196,11 @@ body, ul, li, p, a, label, input, div {
   text-decoration: underline line-through;
 }
 
+.tag-color {
+  font-size: 12px;
+  padding: 0 5px 0 5px;
+}
+
 @media (min-width: 576px) {
   .tempaltemo-carousel .h1 { font-size: 1em !important;}
 }

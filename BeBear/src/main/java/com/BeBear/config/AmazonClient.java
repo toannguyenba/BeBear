@@ -36,9 +36,9 @@ public class AmazonClient {
     
     private String bucketName = "bucketbebear";
     
-    private String accessKey = "AKIAZ5WTNU3HH452ODH4";
+    private String accessKey = "AKIAZ5WTNU3HOSBXJS6T";
     
-    private String secretKey = "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";
+    private String secretKey = "gic7OsEPfRvu7DtBBIC9pP3wqjr0XF/2IVF7iwqV";
     
     @PostConstruct
     private void initializeAmazon() {
@@ -82,8 +82,10 @@ public class AmazonClient {
     
     public void deleteFile(String url) {
     	String [] array = url.split("/");
+    	String fileName = array[3] + "/" + array[4];
+    	System.out.println(fileName);
     	try {
-    		s3client.deleteObject(bucketName, array[3] + "/" + array[4]);
+    		s3client.deleteObject(bucketName, "2021-08-12/1628780209923-ao_phong_den.jpg");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

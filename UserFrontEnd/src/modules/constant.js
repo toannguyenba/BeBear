@@ -34,6 +34,21 @@ const getData = {
         var price = {minSalePrice: minSalePrice, maxSalePrice: maxSalePrice, maxPrice: maxPrice}
 
         return price;
+    },
+
+    getPhoto(products) {
+        var photos = [];
+        products.forEach(product => {
+            product.productdetail.forEach(detail => {
+                if (detail.productPhotos.length > 0) {
+                    photos.push(detail.productPhotos[0]);
+                }
+            })
+            product.photos = photos;
+            photos = [];
+        });
+        
+        return products;
     }
 }
 
