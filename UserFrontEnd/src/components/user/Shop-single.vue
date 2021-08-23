@@ -5,23 +5,17 @@
             <div class="row">
                 <div class="col-lg-5 mt-5">
                     <div class="card mb-3">
-                        <img class="card-img img-fluid" src="/src/assets/img/product_single_10.jpg" alt="Card image cap" id="product-detail">
+                        <img class="card-img img-fluid" :src="selectedImg" alt="Card image cap" id="product-detail">
                     </div>
-                    <div class="row">
-                        <!--Start Controls-->
+                    <!-- <div class="row">
                         <div class="col-1 align-self-center">
                             <a href="#multi-item-example" role="button" data-bs-slide="prev">
                                 <i class="text-dark fas fa-chevron-left"></i>
                                 <span class="sr-only">Previous</span>
                             </a>
                         </div>
-                        <!--End Controls-->
-                        <!--Start Carousel Wrapper-->
                         <div id="multi-item-example" class="col-10 carousel slide carousel-multi-item" data-bs-ride="carousel">
-                            <!--Start Slides-->
                             <div class="carousel-inner product-links-wap" role="listbox">
-
-                                <!--First slide-->
                                 <div class="carousel-item active">
                                     <div class="row">
                                         <div class="col-4">
@@ -41,9 +35,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!--/.First slide-->
-
-                                <!--Second slide-->
                                 <div class="carousel-item">
                                     <div class="row">
                                         <div class="col-4">
@@ -63,9 +54,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!--/.Second slide-->
-
-                                <!--Third slide-->
                                 <div class="carousel-item">
                                     <div class="row">
                                         <div class="col-4">
@@ -85,19 +73,24 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!--/.Third slide-->
                             </div>
-                            <!--End Slides-->
                         </div>
-                        <!--End Carousel Wrapper-->
-                        <!--Start Controls-->
                         <div class="col-1 align-self-center">
                             <a href="#multi-item-example" role="button" data-bs-slide="next">
                                 <i class="text-dark fas fa-chevron-right"></i>
                                 <span class="sr-only">Next</span>
                             </a>
                         </div>
-                        <!--End Controls-->
+                    </div> -->
+                    <div class="row">
+                        <div class="col-md-1 icon-next-pre" @click="pre()"><i class="text-dark fas fa-chevron-left"></i></div>
+                        <div class="col-md-10">
+                            <ul class="images" id="img">
+                                <!-- Inline styles added for demonstration purposes only. -->
+                                <li v-for="(img, index) in images" :key="img" @click="select(index)"><img :src="img" alt=""></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-1 icon-next-pre" @click="next()"><i class="text-dark fas fa-chevron-right"></i></div>
                     </div>
                 </div>
                 <!-- col end -->
@@ -105,14 +98,16 @@
                     <div class="card">
                         <div class="card-body">
                             <h1 class="h2"> {{ product.productName }} </h1>
-                            <p class="h3 py-2 money"> {{ product.price.minSalePrice }}<span class="money-icon">đ</span> - {{ product.price.maxSalePrice }}<span class="money-icon">đ</span><span class="money-line"> {{ product.price.maxPrice }}</span><span class="money-line-icon">đ</span></p>
+                            <p class="h3 py-2 money"> Giá khuyến mại: {{ product.price.minSalePrice }}<span class="money-icon">đ</span> </p>
+                            <!-- - {{ product.price.maxSalePrice }}<span class="money-icon">đ</span></p> -->
+                            <p> Giá gốc: <span class="money-line"> {{ product.price.maxPrice }}</span><span class="money-line-icon">đ</span></p>
                             <p class="py-2">
                                 <i class="fa fa-star text-warning"></i>
                                 <i class="fa fa-star text-warning"></i>
                                 <i class="fa fa-star text-warning"></i>
                                 <i class="fa fa-star text-warning"></i>
-                                <i class="fa fa-star text-secondary"></i>
-                                <span class="list-inline-item text-dark">Rating 4.8 | 36 Comments</span>
+                                <i class="fa fa-star text-warning"></i>
+                                <span class="list-inline-item text-dark">Rating 5.0</span>
                             </p>
                             <ul class="list-inline">
                                 <li class="list-inline-item">
@@ -168,7 +163,7 @@
                                             <li class="list-inline-item">Color :
                                                 <input type="hidden" name="product-size" id="product-size" value="S">
                                             </li>
-                                            <li class="list-inline-item" v-for="color in colors" :key="color.idColor">
+                                            <li class="list-inline-item" v-for="color in colors" :key="color.idColor" @click="changePrice(color.colorName)">
                                                 <span class="btn btn-success btn-size"> {{ color.colorName }} </span>
                                             </li>
                                         </ul>
@@ -190,11 +185,11 @@
                                 </div> -->
                                 <div class="row pb-3">
                                     <div class="col d-grid">
-                                        <button type="submit" class="btn btn-success btn-lg" name="submit" value="buy">Buy</button>
+                                        <button type="submit" class="btn btn-success btn-lg" name="submit" value="buy">Liên hệ để đặt mua sản phẩm</button>
                                     </div>
-                                    <div class="col d-grid">
+                                    <!-- <div class="col d-grid">
                                         <button type="submit" class="btn btn-success btn-lg" name="submit" value="addtocard">Add To Cart</button>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </form>
 
@@ -722,18 +717,7 @@
 <script>
 import getData from "/src/modules/constant.js"
 export default {
-    data() {
-        return {
-            idProduct: null,
-            productDetails: [],
-            colors: [],
-            sizes: [],
-            product: {
-                price: {minSalePrice: 0, maxSalePrice: 0, maxPrice: 0}
-            }
-        }
-    },
-    async mounted() {
+    async created() {
         this.idProduct = this.$route.params.idProduct;
         // this.products = await getData.fetchData("product");
         this.productDetails = await getData.fetchData("productDetail?filter=" + this.idProduct);
@@ -742,9 +726,95 @@ export default {
         this.colors = await getData.fetchData("color?filter=" + this.idProduct);
         this.sizes = await getData.fetchData("size?filter=" + this.idProduct);
         console.log(this.productDetails);
-        console.log(this.product);
-        console.log(this.colors);
-        console.log(this.sizes);
+        // console.log(this.product);
+        // console.log(this.colors);
+        // console.log(this.sizes);
+        this.productDetails.forEach(p => {
+            this.images.push(p.productPhotos[0].url);
+        });
+        this.selectedImg = this.images[0];
+    },
+    data() {
+        return {
+            idProduct: null,
+            productDetails: [],
+            colors: [],
+            sizes: [],
+            product: {
+                price: {minSalePrice: 0, maxSalePrice: 0, maxPrice: 0}
+            },
+            images: [],
+            selectedImg: "",
+        }
+    },
+    methods: {
+        select(index) {
+            this.selectedImg = this.images[index]
+        },
+        next() {
+            var img = document.getElementById("img");
+            img.scrollBy(400, 0);
+        },
+        pre() {
+            var img = document.getElementById("img");
+            img.scrollBy(-400, 0);
+        },
+        changePrice(colorName) {
+            this.productDetails.forEach(p => {
+                if(p.idColor.colorName == colorName) {
+                    this.product.price.minSalePrice = p.salePrice;
+                }
+            });
+        }
+    },
+    async mounted() {
+        
+        
+        
     }
 }
 </script>
+
+<style>
+
+.view img {
+    width: 100%;
+}
+
+.view {
+    margin: 0 5px 30px 5px;
+}
+
+ul.images {
+  margin: 0 5px 0 5px;
+  padding: 0;
+  white-space: nowrap;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+ul.images li {
+  display: inline-block;
+}
+
+ul.images li img {
+    cursor: pointer;
+    width: 150px;
+    height: 150px;
+    margin: 5px;
+}
+
+.icon-next-pre {
+    cursor: pointer;
+    margin-top: 70px;
+}
+
+.money {
+    animation: change 1s step-end both;
+}
+
+@keyframes change {
+    from { color: black }
+    to   { color: red }
+}
+</style>

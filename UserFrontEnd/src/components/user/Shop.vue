@@ -9,12 +9,12 @@
                     <li class="pb-3" v-for="category in categorys" :key="category.idCategory">
                         <a class="collapsed d-flex justify-content-between h3 text-decoration-none" :href="'/shop-filter/' + category.idCategory">
                             {{ category.categoryName }}
-                            <i class="fa fa-fw fa-chevron-circle-down mt-1"></i>
+                            <!-- <i class="fa fa-fw fa-chevron-circle-down mt-1"></i> -->
                         </a>
-                        <ul class="collapse show list-unstyled pl-3">
+                        <!-- <ul class="collapse show list-unstyled pl-3">
                             <li><a class="text-decoration-none" href="#">Men</a></li>
                             <li><a class="text-decoration-none" href="#">Women</a></li>
-                        </ul>
+                        </ul> -->
                     </li>
                     <!-- <li class="pb-3">
                         <a class="collapsed d-flex justify-content-between h3 text-decoration-none" href="#">
