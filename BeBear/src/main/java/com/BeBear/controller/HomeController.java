@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.repository.query.Param;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -54,6 +55,19 @@ public class HomeController {
 		List<Product> products = new ArrayList<Product>();
 		try {
 			products = productService.findProduct(filter);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return products;
+	}
+	
+	@GetMapping("/products")
+	public List<Product> getProduct(@RequestParam(value = "filter", required = false) String filter, @RequestParam("count") int count) {
+		List<Product> products = new ArrayList<Product>();
+		Page<Product> productPage = null;
+		try {
+			productPage = productService.findProductPage(filter, count, 1);
+			products = productPage.getContent();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
