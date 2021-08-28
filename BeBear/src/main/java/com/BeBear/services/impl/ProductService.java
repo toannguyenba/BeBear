@@ -70,9 +70,11 @@ public class ProductService implements IProductService {
 		Pageable pageable = PageRequest.of(currentPage - 1, count);
 		Page<Product> products = null;
 		try {
-			if(filter != null) {
+			if(filter != "") {
 				int idCategory = Integer.parseInt(filter);
 				products = productRepo.findByIdCategory(idCategory, pageable);
+			} else {
+				products = productRepo.findAll(pageable);
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());

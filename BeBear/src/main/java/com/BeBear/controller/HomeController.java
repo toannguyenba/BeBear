@@ -22,6 +22,7 @@ import com.BeBear.entities.Color;
 import com.BeBear.entities.Product;
 import com.BeBear.entities.ProductDetail;
 import com.BeBear.entities.Size;
+import com.BeBear.model.ListProduct;
 import com.BeBear.services.impl.CategoryService;
 import com.BeBear.services.impl.ColorService;
 import com.BeBear.services.impl.ProductDetailService;
@@ -62,16 +63,23 @@ public class HomeController {
 	}
 	
 	@GetMapping("/products")
-	public List<Product> getProduct(@RequestParam(value = "filter", required = false) String filter, @RequestParam("count") int count) {
+	public ListProduct getProduct(@RequestParam(value = "filter", required = false) String filter, 
+			@RequestParam("count") int count,
+			@RequestParam("currentPage") int currentPage) {
+		ListProduct list = new ListProduct();
 		List<Product> products = new ArrayList<Product>();
 		Page<Product> productPage = null;
+		int totalPage;
 		try {
-			productPage = productService.findProductPage(filter, count, 1);
+			productPage = productService.findProductPage(filter, count, currentPage);
 			products = productPage.getContent();
+			totalPage = productPage.getTotalPages();
+			list.setProducts(products);
+			list.setTotalPage(totalPage);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-		return products;
+		return list;
 	}
 	
 	@GetMapping("/productByIdProduct")
