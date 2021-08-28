@@ -49,15 +49,15 @@ export default {
             productdetail: [{productPhotos: [{url: ""}]}]
         }
     },
+    async created() {
+        this.price = getData.getPrice(this.product);
+        this.colors = await getData.fetchData("color?filter=" + this.product.idProduct);
+    },
     data() {
         return {
             price: {minSalePrice: 0, maxSalePrice: 0, maxPrice: 0},
             colors: []
         }
     },
-    async mounted() {
-        this.price = getData.getPrice(this.product);
-        this.colors = await getData.fetchData("color?filter=" + this.product.idProduct);
-    }
 }
 </script>

@@ -66,7 +66,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <product v-for="product in products" :key="product" :product="product" />
+                    <product v-for="product in listProduct.products" :key="product" :product="product" />
                     <!-- <div class="col-md-4">
                         <div class="card mb-4 product-wap rounded-0">
                             <div class="card rounded-0">
@@ -499,9 +499,8 @@ export default {
         return {
             categorys: [],
             idCategory: null,
-            products: [
-                
-            ]
+            products: [],
+            listProduct: {}
         }
     },
 
@@ -509,9 +508,9 @@ export default {
         this.categorys = await getData.fetchData("category");
         this.idCategory = this.$route.params.idCategory;
         if (window.location.pathname != '/shop') {
-            this.products = await getData.fetchData("product?filter=" + this.idCategory);
+            this.listProduct = await getData.fetchData("products?filter=" + this.idCategory + "&count=9" + "&currentPage=1");
         } else {
-            this.products = await getData.fetchData("product");
+            this.listProduct = await getData.fetchData("products?filter=" + "&count=9" + "&currentPage=1");
         }
         this.products = await getData.getPhoto(this.products);
         console.log("category", this.categorys)
